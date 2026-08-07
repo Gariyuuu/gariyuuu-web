@@ -8,7 +8,7 @@ session, not by trusting prior notes.
 
 **Status: verified, live.**
 
-- Pitches the self-hosted AI platform ("Yuu no Sekai" / Qwen3-8B) as the
+- Pitches the self-hosted AI platform ("Yuu v1.1" / Qwen3-8B) as the
   reason the site exists.
 - Links to `/chat`, `/projects`, `/about`.
 - "How it works" 3-step explainer (gateway → per-app keys → no vendor
@@ -51,9 +51,14 @@ unnecessarily — the route and streaming logic were read directly instead).
 - Input caps: 20 messages/conversation, 2000 chars/message, `max_tokens: 400`,
   reasoning disabled — all enforced server-side in the route, not just the
   UI.
-- Model is presented to users as "Yuu no Sekai"; the actual upstream model
-  string sent is `"Yuu no Sekai"` too (i.e., that's the literal model name
-  configured on the AI platform's gateway, not just a marketing label).
+- Model is presented to users as "Yuu v1.1" (rebranded from "Yuu no Sekai"
+  on 2026-08-07). This is now a display-only label — the `model` string
+  actually sent to the AI platform's `/chat/completions` in
+  `src/app/api/chat/route.ts` is still the literal `"Yuu no Sekai"`, matching
+  the `MODEL_NAME` registered in the separate `ai-platform` repo's config.
+  Don't "fix" this mismatch by renaming the API field without first updating
+  `MODEL_NAME` in that repo's production `.env` — doing so will break the
+  live chat demo with a `model_not_found` error.
 - Fails gracefully with a user-facing error message on missing env config,
   upstream unreachable, or 429 (rate-limited).
 

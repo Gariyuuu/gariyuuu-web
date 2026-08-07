@@ -5,7 +5,7 @@
 A single Next.js 16 (App Router) app, deployed on Vercel, with no database of
 its own. It has exactly two integration points with the outside world, both
 env-var-configured HTTP calls to a **separate** project — the self-hosted AI
-platform ("Yuu no Sekai", repo: `~/Projects/ai-platform`, live at
+platform ("Yuu v1.1", repo: `~/Projects/ai-platform`, live at
 `api.gariyuuu.com`):
 
 ```

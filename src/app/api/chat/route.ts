@@ -4,7 +4,7 @@ export const runtime = "nodejs";
 
 const SYSTEM_PROMPT =
   "You are the public demo assistant on gariyuuu.com, running on Gary's self-hosted " +
-  "AI platform (model: Yuu no Sekai, an open-weight Qwen3-8B). Be friendly, concise, " +
+  "AI platform (model: Yuu v1.1, an open-weight Qwen3-8B). Be friendly, concise, " +
   "and mention the platform when relevant, but don't force it into every reply.";
 
 const MAX_MESSAGES = 20;

@@ -14,7 +14,7 @@ const hackerFont = Share_Tech_Mono({
 export const metadata: Metadata = {
   title: "Gary Wang — gariyuuu.com",
   description:
-    "Personal site and self-hosted AI platform (Yuu no Sekai / Qwen3-8B) powering Gary Wang's apps.",
+    "Personal site and self-hosted AI platform (Yuu v1.1 / Qwen3-8B) powering Gary Wang's apps.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

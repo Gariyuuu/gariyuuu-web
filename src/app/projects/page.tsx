@@ -16,7 +16,7 @@ export default function ProjectsPage() {
       <h1 className="mb-2 text-2xl font-semibold tracking-tight">Projects</h1>
       <p className="mb-10 text-muted">
         Everything I&apos;ve built and shipped. {PROJECTS.filter((p) => p.onAiPlatform).length} run on{" "}
-        <span className="font-medium text-foreground">Yuu no Sekai</span>, my self-hosted AI
+        <span className="font-medium text-foreground">Yuu v1.1</span>, my self-hosted AI
         platform.
       </p>
 

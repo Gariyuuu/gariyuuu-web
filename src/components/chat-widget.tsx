@@ -88,7 +88,7 @@ export function ChatWidget() {
         {messages.length === 0 && (
           <p className="text-sm text-muted">
             Say hello. This is a real, live conversation with{" "}
-            <span className="font-medium text-foreground">Yuu no Sekai</span>, rate-limited
+            <span className="font-medium text-foreground">Yuu v1.1</span>, rate-limited
             for public use.
           </p>
         )}

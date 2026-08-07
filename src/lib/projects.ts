@@ -10,7 +10,7 @@ export interface Project {
 // Live URLs verified directly (curl'd 200, or docs cross-checked against a
 // live response) while building this page, not guessed.
 export const PROJECTS: Project[] = [
-  // --- Running on the self-hosted AI platform (Yuu no Sekai) ---
+  // --- Running on the self-hosted AI platform (Yuu v1.1) ---
   {
     slug: "nodability",
     name: "Nodability",

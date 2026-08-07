@@ -15,7 +15,9 @@ A Next.js 16 (App Router) site with four surfaces:
 1. Landing page (`/`) — pitches the self-hosted AI platform and links out.
 2. About/résumé (`/about`) — Gary's real bio, experience, education.
 3. Public chat demo (`/chat`) — a rate-limited, streaming chat against Gary's
-   self-hosted model ("Yuu no Sekai" = Qwen3-8B), proxied server-side.
+   self-hosted model ("Yuu v1.1" = Qwen3-8B; the API's `model` field still
+   sends the literal string `"Yuu no Sekai"` — see FEATURES.md), proxied
+   server-side.
 4. Password-gated usage dashboard (`/dashboard`) — shows live per-app token/request
    usage pulled from the AI platform's admin API. Gated by email allowlist + a
    single shared password (see SECURITY.md for exactly how, and its limits).

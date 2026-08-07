@@ -4,7 +4,19 @@ Reconstructed from `git log` (no prior CHANGELOG existed). All dates are
 2026-08-07 — this project was built and shipped in one continuous session.
 Format: loosely [Keep a Changelog](https://keepachangelog.com/), without
 version numbers since this project has no release/tag scheme (`git tag`
-shows none).
+shows none). Starting with the 0.1.1 patch below, `package.json`'s
+`version` field is kept in sync.
+
+## 0.1.1 — 2026-08-07
+
+### Changed
+- Rebranded the on-page model name from "Yuu no Sekai" to "Yuu v1.1"
+  across the landing page, `/chat`, `/projects`, the chat widget, the boot
+  intro, and page metadata. Display-only: the `model` field actually sent
+  to the AI platform's `/chat/completions` in `src/app/api/chat/route.ts`
+  is unchanged (`"Yuu no Sekai"`), since that must match the `MODEL_NAME`
+  registered in the separate `ai-platform` repo's production config — see
+  `FEATURES.md` for the note on this intentional split.
 
 ## 2026-08-07
 

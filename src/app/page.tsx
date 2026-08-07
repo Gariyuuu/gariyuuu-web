@@ -16,7 +16,7 @@ export default function Home() {
         </h1>
         <p className="max-w-2xl text-lg text-muted">
           Instead of paying per-token for a proprietary API, every app I build talks to{" "}
-          <span className="font-medium text-foreground">Yuu no Sekai</span> — an
+          <span className="font-medium text-foreground">Yuu v1.1</span> — an
           open-weight model (Qwen3-8B) I run behind my own OpenAI-compatible gateway,
           with its own auth, rate limiting, and usage tracking.
         </p>

@@ -7,7 +7,7 @@ Four surfaces:
 - `/about` — résumé/bio.
 - `/projects` — every shipped/in-progress project (see `src/lib/projects.ts`).
 - `/chat` — public, rate-limited streaming chat demo against Gary's self-hosted
-  model ("Yuu no Sekai", Qwen3-8B).
+  model ("Yuu v1.1", Qwen3-8B).
 - `/dashboard` — email-allowlist + password-gated live usage dashboard,
   aggregating per-app token/request usage from the AI platform's admin API.
 
