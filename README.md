@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# gariyuuu.com
 
-## Getting Started
+Gary Wang's personal site. Live at **https://gariyuuu.com**.
 
-First, run the development server:
+Four surfaces:
+- `/` — landing page pitching the self-hosted AI platform, featured projects.
+- `/about` — résumé/bio.
+- `/projects` — every shipped/in-progress project (see `src/lib/projects.ts`).
+- `/chat` — public, rate-limited streaming chat demo against Gary's self-hosted
+  model ("Yuu no Sekai", Qwen3-8B).
+- `/dashboard` — email-allowlist + password-gated live usage dashboard,
+  aggregating per-app token/request usage from the AI platform's admin API.
+
+For anyone (human or AI) picking this repo up: **read `HANDOFF.md` first**, then
+`PROJECT_STATE.md`. The full canonical doc set (`CLAUDE.md`, `ARCHITECTURE.md`,
+`SECURITY.md`, etc.) lives at the repo root — see `FILE_MAP.md` for what's where.
+
+## Stack
+
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4. No database.
+Deployed on Vercel, auto-deploy from `main`. See `DEPLOYMENT.md`.
+
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local   # fill in real values, never commit this file
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Some features degrade gracefully without env vars
+set (e.g. dashboard/chat return a "not configured" error instead of crashing);
+see `.env.example` for what each var does and `SECURITY.md` for how the
+dashboard gate works.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` — dev server
+- `npm run build` — production build
+- `npm run start` — run a production build locally
+- `npm run lint` — ESLint (flat config, `eslint.config.mjs`)
 
-## Learn More
+## Docs
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See `TASKS.md` (current work), `ARCHITECTURE.md` (how the usage dashboard talks
+to the AI platform), `SECURITY.md` (how the dashboard gate actually works, and
+its limits), `TESTING.md` (there is currently no automated test suite —
+verification is manual).
