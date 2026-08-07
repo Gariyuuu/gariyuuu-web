@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Share_Tech_Mono } from "next/font/google";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
-import { MatrixRain } from "@/components/matrix-rain";
-import { BootIntro } from "@/components/boot-intro";
+import { SiteFx } from "@/components/site-fx";
 import "./globals.css";
 
 const hackerFont = Share_Tech_Mono({
@@ -22,8 +21,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${hackerFont.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
-        <MatrixRain />
-        <BootIntro />
+        <SiteFx />
         <Nav />
         <main className="relative z-10 flex-1">{children}</main>
         <Footer />

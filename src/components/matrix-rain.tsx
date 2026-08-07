@@ -4,12 +4,20 @@ import { useEffect, useRef } from "react";
 
 const FONT_SIZE = 13;
 
+const FAST = { throttle: 1, fadeAlpha: 0.035, trailCount: 14 };
+const SLOW = { throttle: 6, fadeAlpha: 0.09, trailCount: 5 };
+
 function randomNumber() {
   return String(Math.floor(Math.random() * 100));
 }
 
-export function MatrixRain() {
+export function MatrixRain({ fast = false }: { fast?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const fastRef = useRef(fast);
+
+  useEffect(() => {
+    fastRef.current = fast;
+  }, [fast]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -32,11 +40,15 @@ export function MatrixRain() {
     resize();
     window.addEventListener("resize", resize);
 
+    let frame = 0;
     let raf = 0;
     function draw() {
       raf = requestAnimationFrame(draw);
+      const settings = fastRef.current ? FAST : SLOW;
+      frame++;
+      if (frame % settings.throttle !== 0) return;
 
-      ctx!.fillStyle = "rgba(0, 0, 0, 0.035)";
+      ctx!.fillStyle = `rgba(0, 0, 0, ${settings.fadeAlpha})`;
       ctx!.fillRect(0, 0, canvas!.width, canvas!.height);
 
       ctx!.font = `${FONT_SIZE - 2}px var(--font-hacker, monospace)`;
@@ -47,7 +59,7 @@ export function MatrixRain() {
         ctx!.fillStyle = "rgba(220, 220, 220, 0.85)";
         ctx!.fillText(randomNumber(), x, y);
         ctx!.fillStyle = "rgba(140, 140, 140, 0.22)";
-        for (let t = 1; t <= 14; t++) {
+        for (let t = 1; t <= settings.trailCount; t++) {
           ctx!.fillText(randomNumber(), x, y - t * FONT_SIZE);
         }
 
