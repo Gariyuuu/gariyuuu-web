@@ -6,13 +6,18 @@ export const runtime = "nodejs";
 export async function POST(req: NextRequest) {
   const secret = process.env.DASHBOARD_SESSION_SECRET;
   const password = process.env.DASHBOARD_PASSWORD;
-  if (!secret || !password) {
+  const allowedEmailsRaw = process.env.DASHBOARD_ALLOWED_EMAILS;
+  if (!secret || !password || !allowedEmailsRaw) {
     return NextResponse.json({ error: "Dashboard is not configured." }, { status: 500 });
   }
+  const allowedEmails = allowedEmailsRaw.split(",").map((e) => e.trim().toLowerCase());
 
   const body = await req.json().catch(() => null);
-  if (!body || typeof body.password !== "string" || body.password !== password) {
-    return NextResponse.json({ error: "Incorrect password." }, { status: 401 });
+  const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
+  const submittedPassword = typeof body?.password === "string" ? body.password : "";
+
+  if (!allowedEmails.includes(email) || submittedPassword !== password) {
+    return NextResponse.json({ error: "Incorrect email or password." }, { status: 401 });
   }
 
   const res = NextResponse.json({ ok: true });
