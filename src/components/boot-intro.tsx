@@ -50,12 +50,15 @@ const FLOOD_LINES = [
 ];
 
 const FLOOD_WINDOWS: { title: string; style: CSSProperties }[] = [
-  { title: "root@10.0.4.17", style: { top: "6%", left: "4%", transform: "rotate(-2deg)" } },
-  { title: "proc/exploit", style: { top: "9%", right: "5%", transform: "rotate(1.5deg)" } },
-  { title: "net/scan", style: { top: "58%", left: "3%", transform: "rotate(1deg)" } },
-  { title: "shell#0x1F", style: { bottom: "8%", right: "4%", transform: "rotate(-1.5deg)" } },
-  { title: "session_7", style: { top: "36%", left: "39%", transform: "rotate(-1deg)" } },
-  { title: "sys/kernel", style: { bottom: "10%", left: "22%", transform: "rotate(2deg)" } },
+  { title: "root@10.0.4.17", style: { top: "1%", left: "1%", width: "32%", height: "31vh", transform: "rotate(-1deg)" } },
+  { title: "proc/exploit", style: { top: "1%", left: "34%", width: "32%", height: "31vh", transform: "rotate(0.8deg)" } },
+  { title: "net/scan", style: { top: "1%", left: "67%", width: "32%", height: "31vh", transform: "rotate(-0.6deg)" } },
+  { title: "shell#0x1F", style: { top: "34%", left: "1%", width: "32%", height: "31vh", transform: "rotate(0.7deg)" } },
+  { title: "session_7", style: { top: "34%", left: "34%", width: "32%", height: "31vh", transform: "rotate(-0.9deg)" } },
+  { title: "sys/kernel", style: { top: "34%", left: "67%", width: "32%", height: "31vh", transform: "rotate(0.6deg)" } },
+  { title: "auth/bypass", style: { top: "67%", left: "1%", width: "32%", height: "31vh", transform: "rotate(-0.7deg)" } },
+  { title: "db/dump", style: { top: "67%", left: "34%", width: "32%", height: "31vh", transform: "rotate(1deg)" } },
+  { title: "trace/wipe", style: { top: "67%", left: "67%", width: "32%", height: "31vh", transform: "rotate(-0.5deg)" } },
 ];
 
 const CRASH_LINES = ["SYSTEM COMPROMISED", "SYSTEM FAILURE", "CONNECTION TERMINATED"];
@@ -138,13 +141,15 @@ export function BootIntro() {
   if (phase === "hidden") return null;
 
   const crashing = phase === "crash" && !fading;
+  const shaking = phase === "flood" && !fading;
 
   return (
     <div
       className={
         "fixed inset-0 z-50 flex cursor-pointer flex-col items-center justify-center bg-black px-6 transition-opacity duration-500 " +
         (fading ? "pointer-events-none opacity-0" : "opacity-100") +
-        (crashing ? " animate-boot-crash" : "")
+        (crashing ? " animate-boot-crash" : "") +
+        (shaking ? " animate-boot-flood-shake" : "")
       }
     >
       {phase === "boot" && (
@@ -162,20 +167,20 @@ export function BootIntro() {
         FLOOD_WINDOWS.map((win, w) => {
           const lines = FLOOD_LINES.slice(0, index)
             .filter((_, i) => i % FLOOD_WINDOWS.length === w)
-            .slice(-5);
+            .slice(-8);
           return (
             <div
               key={w}
-              className="absolute w-56 border border-white/25 bg-black/90 text-[9px] shadow-lg shadow-black/60 sm:w-64 sm:text-[10px]"
+              className="absolute flex flex-col overflow-hidden border border-white/25 bg-black/95 text-[10px] shadow-lg shadow-black/60 sm:text-xs"
               style={win.style}
             >
-              <div className="flex items-center gap-1.5 border-b border-white/20 bg-white/5 px-2 py-1">
+              <div className="flex shrink-0 items-center gap-1.5 border-b border-white/20 bg-white/5 px-2 py-1">
                 <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
                 <span className="h-1.5 w-1.5 rounded-full bg-white/45" />
                 <span className="h-1.5 w-1.5 rounded-full bg-white/25" />
                 <span className="ml-1 truncate text-white/50">{win.title}</span>
               </div>
-              <div className="min-h-[5.5em] space-y-0.5 p-2 leading-tight text-white/75">
+              <div className="flex-1 space-y-1 overflow-hidden p-2 leading-tight text-white/75">
                 {lines.map((line, i) => (
                   <p key={i} className="truncate">
                     {line}

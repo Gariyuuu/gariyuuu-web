@@ -55,14 +55,32 @@ body {
 }
 
 @keyframes boot-crash-flicker {
-  0%, 100% { background-color: #7a0000; }
-  20% { background-color: #b30000; }
-  40% { background-color: #5c0000; }
-  60% { background-color: #8f0000; }
-  80% { background-color: #400000; }
+  0%, 100% { background-color: #7a0000; transform: translate(0, 0); }
+  15% { background-color: #b30000; transform: translate(-6px, 4px); }
+  30% { background-color: #5c0000; transform: translate(6px, -4px); }
+  45% { background-color: #8f0000; transform: translate(-5px, -6px); }
+  60% { background-color: #400000; transform: translate(5px, 6px); }
+  75% { background-color: #b30000; transform: translate(-6px, 3px); }
+  90% { background-color: #5c0000; transform: translate(6px, -3px); }
 }
 .animate-boot-crash {
   animation: boot-crash-flicker 0.15s steps(1) infinite;
+}
+
+@keyframes boot-flood-shake {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2px, 1px); }
+  20% { transform: translate(2px, -1px); }
+  30% { transform: translate(-1px, -2px); }
+  40% { transform: translate(1px, 2px); }
+  50% { transform: translate(-2px, 0); }
+  60% { transform: translate(2px, 0); }
+  70% { transform: translate(0, -2px); }
+  80% { transform: translate(0, 2px); }
+  90% { transform: translate(-1px, 1px); }
+}
+.animate-boot-flood-shake {
+  animation: boot-flood-shake 0.35s infinite;
 }
 
 @keyframes boot-glitch-shake {
