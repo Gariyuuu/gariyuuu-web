@@ -61,6 +61,17 @@ const FLOOD_WINDOWS: { title: string; style: CSSProperties }[] = [
   { title: "trace/wipe", style: { top: "67%", left: "67%", width: "32%", height: "31vh", transform: "rotate(-0.5deg)" } },
 ];
 
+const POPUPS: { title: string; message: string; style: CSSProperties }[] = [
+  { title: "System Error", message: "A fatal exception 0E has occurred at 0028:C0011E36.", style: { top: "6%", left: "12%", transform: "rotate(-3deg)" } },
+  { title: "Warning", message: "Virus detected in C:\\WINDOWS\\SYSTEM32\\", style: { top: "14%", left: "58%", transform: "rotate(2deg)" } },
+  { title: "Access Denied", message: "You do not have permission to perform this action.", style: { top: "42%", left: "22%", transform: "rotate(-2deg)" } },
+  { title: "Critical Alert", message: "Unauthorized access detected on this machine.", style: { top: "50%", left: "62%", transform: "rotate(3deg)" } },
+  { title: "Security Warning", message: "Firewall has been disabled remotely.", style: { top: "66%", left: "10%", transform: "rotate(-1deg)" } },
+  { title: "Error", message: "The application has encountered an unknown error.", style: { top: "72%", left: "52%", transform: "rotate(2deg)" } },
+  { title: "Intruder Alert", message: "Multiple failed login attempts detected.", style: { top: "26%", left: "76%", transform: "rotate(-2deg)" } },
+  { title: "System32", message: "Deleting critical system files...", style: { top: "84%", left: "32%", transform: "rotate(1deg)" } },
+];
+
 const CRASH_LINES = ["SYSTEM COMPROMISED", "SYSTEM FAILURE", "CONNECTION TERMINATED"];
 const RECOVER_LINES = ["REBOOTING...", "WELCOME BACK, GARY."];
 
@@ -190,6 +201,30 @@ export function BootIntro() {
             </div>
           );
         })}
+
+      {phase === "flood" &&
+        POPUPS.slice(0, Math.min(POPUPS.length, Math.floor(index / 3))).map((p, i) => (
+          <div
+            key={i}
+            className="absolute w-56 border-2 border-white bg-gray-100 text-black shadow-2xl sm:w-64"
+            style={p.style}
+          >
+            <div className="flex items-center justify-between bg-black px-2 py-1 text-[10px] font-bold text-white">
+              <span>{p.title}</span>
+              <span className="flex h-3.5 w-3.5 items-center justify-center border border-white bg-gray-700 text-[9px] leading-none text-white">
+                &times;
+              </span>
+            </div>
+            <div className="p-2 text-[10px] leading-snug">
+              <p>{p.message}</p>
+              <div className="mt-2 flex justify-end">
+                <span className="border border-black bg-gray-300 px-3 py-0.5 text-[9px] font-semibold shadow-[1px_1px_0_#000]">
+                  OK
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
 
       {phase === "crash" && (
         <div className="text-center">

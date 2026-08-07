@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const FONT_SIZE = 20;
+const FONT_SIZE = 13;
 
 function randomNumber() {
   return String(Math.floor(Math.random() * 100));
@@ -32,29 +32,26 @@ export function MatrixRain() {
     resize();
     window.addEventListener("resize", resize);
 
-    let frame = 0;
     let raf = 0;
     function draw() {
       raf = requestAnimationFrame(draw);
-      frame++;
-      if (frame % 4 !== 0) return; // slow the fall rate
 
-      ctx!.fillStyle = "rgba(0, 0, 0, 0.08)";
+      ctx!.fillStyle = "rgba(0, 0, 0, 0.035)";
       ctx!.fillRect(0, 0, canvas!.width, canvas!.height);
 
-      ctx!.font = `${FONT_SIZE - 4}px var(--font-hacker, monospace)`;
+      ctx!.font = `${FONT_SIZE - 2}px var(--font-hacker, monospace)`;
       for (let i = 0; i < columns; i++) {
         const x = i * FONT_SIZE;
         const y = drops[i] * FONT_SIZE;
 
-        ctx!.fillStyle = "rgba(210, 210, 210, 0.75)";
+        ctx!.fillStyle = "rgba(220, 220, 220, 0.85)";
         ctx!.fillText(randomNumber(), x, y);
-        ctx!.fillStyle = "rgba(120, 120, 120, 0.12)";
-        for (let t = 1; t <= 6; t++) {
+        ctx!.fillStyle = "rgba(140, 140, 140, 0.22)";
+        for (let t = 1; t <= 14; t++) {
           ctx!.fillText(randomNumber(), x, y - t * FONT_SIZE);
         }
 
-        if (y > canvas!.height && Math.random() > 0.975) {
+        if (y > canvas!.height && Math.random() > 0.96) {
           drops[i] = 0;
         } else {
           drops[i]++;
@@ -73,7 +70,7 @@ export function MatrixRain() {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-40"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-50"
     />
   );
 }
