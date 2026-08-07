@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 
 const BOOT_LINES = [
   "GARIYUUU.COM",
@@ -47,6 +47,15 @@ const FLOOD_LINES = [
   "CLEARING LOGS...",
   "DISCONNECTING TRACE...",
   "SIGNAL LOST",
+];
+
+const FLOOD_WINDOWS: { title: string; style: CSSProperties }[] = [
+  { title: "root@10.0.4.17", style: { top: "6%", left: "4%", transform: "rotate(-2deg)" } },
+  { title: "proc/exploit", style: { top: "9%", right: "5%", transform: "rotate(1.5deg)" } },
+  { title: "net/scan", style: { top: "58%", left: "3%", transform: "rotate(1deg)" } },
+  { title: "shell#0x1F", style: { bottom: "8%", right: "4%", transform: "rotate(-1.5deg)" } },
+  { title: "session_7", style: { top: "36%", left: "39%", transform: "rotate(-1deg)" } },
+  { title: "sys/kernel", style: { bottom: "10%", left: "22%", transform: "rotate(2deg)" } },
 ];
 
 const CRASH_LINES = ["SYSTEM COMPROMISED", "SYSTEM FAILURE", "CONNECTION TERMINATED"];
@@ -138,23 +147,44 @@ export function BootIntro() {
         (crashing ? " animate-boot-crash" : "")
       }
     >
-      {(phase === "boot" || phase === "flood") && (
+      {phase === "boot" && (
         <div className="w-full max-w-lg text-xs sm:text-sm">
-          {phase === "boot" &&
-            BOOT_LINES.slice(0, index).map((line, i) => (
-              <p key={i} className="mb-1 tracking-wide text-foreground/90">
-                <span className="text-accent">&gt;</span> {line}
-              </p>
-            ))}
-          {phase === "flood" &&
-            FLOOD_LINES.slice(Math.max(0, index - 14), index).map((line, i) => (
-              <p key={i} className="mb-1 tracking-wide text-muted">
-                <span className="text-accent-2">&gt;</span> {line}
-              </p>
-            ))}
+          {BOOT_LINES.slice(0, index).map((line, i) => (
+            <p key={i} className="mb-1 tracking-wide text-foreground/90">
+              <span className="text-accent">&gt;</span> {line}
+            </p>
+          ))}
           <span className="inline-block h-3 w-2 animate-pulse bg-accent align-middle" />
         </div>
       )}
+
+      {phase === "flood" &&
+        FLOOD_WINDOWS.map((win, w) => {
+          const lines = FLOOD_LINES.slice(0, index)
+            .filter((_, i) => i % FLOOD_WINDOWS.length === w)
+            .slice(-5);
+          return (
+            <div
+              key={w}
+              className="absolute w-56 border border-white/25 bg-black/90 text-[9px] shadow-lg shadow-black/60 sm:w-64 sm:text-[10px]"
+              style={win.style}
+            >
+              <div className="flex items-center gap-1.5 border-b border-white/20 bg-white/5 px-2 py-1">
+                <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
+                <span className="h-1.5 w-1.5 rounded-full bg-white/45" />
+                <span className="h-1.5 w-1.5 rounded-full bg-white/25" />
+                <span className="ml-1 truncate text-white/50">{win.title}</span>
+              </div>
+              <div className="min-h-[5.5em] space-y-0.5 p-2 leading-tight text-white/75">
+                {lines.map((line, i) => (
+                  <p key={i} className="truncate">
+                    {line}
+                  </p>
+                ))}
+              </div>
+            </div>
+          );
+        })}
 
       {phase === "crash" && (
         <div className="text-center">
