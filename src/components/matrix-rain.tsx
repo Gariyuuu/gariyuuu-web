@@ -2,8 +2,11 @@
 
 import { useEffect, useRef } from "react";
 
-const CHARS = "0123456789";
-const FONT_SIZE = 16;
+const FONT_SIZE = 20;
+
+function randomNumber() {
+  return String(Math.floor(Math.random() * 100));
+}
 
 export function MatrixRain() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -34,22 +37,21 @@ export function MatrixRain() {
     function draw() {
       raf = requestAnimationFrame(draw);
       frame++;
-      if (frame % 2 !== 0) return; // slow the fall rate
+      if (frame % 4 !== 0) return; // slow the fall rate
 
-      ctx!.fillStyle = "rgba(0, 0, 0, 0.07)";
+      ctx!.fillStyle = "rgba(0, 0, 0, 0.08)";
       ctx!.fillRect(0, 0, canvas!.width, canvas!.height);
 
-      ctx!.font = `${FONT_SIZE}px var(--font-hacker, monospace)`;
+      ctx!.font = `${FONT_SIZE - 4}px var(--font-hacker, monospace)`;
       for (let i = 0; i < columns; i++) {
-        const char = CHARS[Math.floor(Math.random() * CHARS.length)];
         const x = i * FONT_SIZE;
         const y = drops[i] * FONT_SIZE;
 
-        ctx!.fillStyle = "rgba(0, 255, 140, 0.85)";
-        ctx!.fillText(char, x, y);
-        ctx!.fillStyle = "rgba(0, 255, 140, 0.13)";
+        ctx!.fillStyle = "rgba(210, 210, 210, 0.75)";
+        ctx!.fillText(randomNumber(), x, y);
+        ctx!.fillStyle = "rgba(120, 120, 120, 0.12)";
         for (let t = 1; t <= 6; t++) {
-          ctx!.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], x, y - t * FONT_SIZE);
+          ctx!.fillText(randomNumber(), x, y - t * FONT_SIZE);
         }
 
         if (y > canvas!.height && Math.random() > 0.975) {

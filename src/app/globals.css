@@ -53,3 +53,25 @@ body {
   background: var(--accent);
   color: var(--accent-fg);
 }
+
+@keyframes boot-crash-flicker {
+  0%, 100% { background-color: #7a0000; }
+  20% { background-color: #b30000; }
+  40% { background-color: #5c0000; }
+  60% { background-color: #8f0000; }
+  80% { background-color: #400000; }
+}
+.animate-boot-crash {
+  animation: boot-crash-flicker 0.15s steps(1) infinite;
+}
+
+@keyframes boot-glitch-shake {
+  0% { transform: translate(0, 0); text-shadow: 2px 0 #000000, -2px 0 #00e5ff; }
+  25% { transform: translate(-3px, 2px); text-shadow: -2px 0 #000000, 2px 0 #00e5ff; }
+  50% { transform: translate(3px, -2px); text-shadow: 2px 0 #00e5ff, -2px 0 #000000; }
+  75% { transform: translate(-2px, -1px); text-shadow: -1px 0 #00e5ff, 1px 0 #000000; }
+  100% { transform: translate(0, 0); text-shadow: 2px 0 #000000, -2px 0 #00e5ff; }
+}
+.animate-boot-glitch {
+  animation: boot-glitch-shake 0.12s infinite;
+}
