@@ -143,6 +143,12 @@ export default function AboutPage() {
             >
               LinkedIn
             </a>
+            <a
+              href="https://openreview.net/profile?id=~Shengyi_Wang5"
+              className="text-accent hover:underline"
+            >
+              OpenReview
+            </a>
             <a href="mailto:gywng006@gmail.com" className="text-accent hover:underline">
               Email
             </a>
@@ -226,6 +232,13 @@ export default function AboutPage() {
           . You can also check out my code on{" "}
           <a href="https://github.com/Gariyuuu" className="text-accent hover:underline">
             GitHub
+          </a>{" "}
+          or my published research on{" "}
+          <a
+            href="https://openreview.net/profile?id=~Shengyi_Wang5"
+            className="text-accent hover:underline"
+          >
+            OpenReview
           </a>
           .
         </p>
