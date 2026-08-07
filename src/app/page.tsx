@@ -1,19 +1,12 @@
 import Link from "next/link";
-
-const apps = [
-  { name: "Nodability", href: "https://nodability.vercel.app" },
-  { name: "Daily Brief", href: "https://daily-brief-70cu7npew-garywangsmes-8349s-projects.vercel.app" },
-  { name: "AniBrief", href: "https://anibrief.vercel.app" },
-  { name: "DramaBrief", href: "https://dramabrief.vercel.app" },
-  { name: "Market Brief", href: "https://market-brief.vercel.app" },
-  { name: "Engo", href: "https://engo-peach.vercel.app" },
-  { name: "Mindloop", href: "https://mindloop-pink.vercel.app" },
-  { name: "Trading Professor", href: "https://trading-professor-gary.fly.dev" },
-];
+import { PROJECTS } from "@/lib/projects";
+import { ProjectCard } from "@/components/project-card";
 
 export default function Home() {
+  const featured = PROJECTS.slice(0, 4);
+
   return (
-    <div className="mx-auto max-w-4xl px-6">
+    <div className="mx-auto max-w-5xl px-6">
       <section className="flex flex-col gap-6 py-24">
         <p className="font-mono text-sm text-muted">gariyuuu.com</p>
         <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -33,6 +26,12 @@ export default function Home() {
             className="rounded-full bg-gradient-to-r from-accent to-accent-2 px-5 py-2.5 text-sm font-medium text-accent-fg transition-opacity hover:opacity-90"
           >
             Try the live chat demo
+          </Link>
+          <Link
+            href="/projects"
+            className="rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-surface-2"
+          >
+            See all projects
           </Link>
           <Link
             href="/about"
@@ -60,8 +59,8 @@ export default function Home() {
             <p className="mb-1 font-mono text-xs text-accent">02</p>
             <p className="font-medium">Every app plugs in</p>
             <p className="mt-1 text-sm text-muted">
-              Each app below has its own dedicated key and its usage is tracked
-              separately — see the dashboard for real numbers.
+              Each app has its own dedicated key and its usage is tracked separately —
+              see the dashboard for real numbers.
             </p>
           </div>
           <div className="card p-5">
@@ -76,21 +75,17 @@ export default function Home() {
       </section>
 
       <section className="border-t border-border py-16">
-        <h2 className="mb-6 text-sm font-medium uppercase tracking-wider text-muted">
-          Apps running on this platform
-        </h2>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {apps.map((app) => (
-            <a
-              key={app.name}
-              href={app.href}
-              target="_blank"
-              rel="noreferrer"
-              className="card flex items-center justify-between p-4 transition-colors hover:border-accent"
-            >
-              <span className="font-medium">{app.name}</span>
-              <span className="text-muted">&rarr;</span>
-            </a>
+        <div className="mb-6 flex items-baseline justify-between">
+          <h2 className="text-sm font-medium uppercase tracking-wider text-muted">
+            Featured projects
+          </h2>
+          <Link href="/projects" className="text-sm text-accent hover:underline">
+            View all &rarr;
+          </Link>
+        </div>
+        <div className="grid gap-5 sm:grid-cols-2">
+          {featured.map((p) => (
+            <ProjectCard key={p.slug} project={p} />
           ))}
         </div>
       </section>
