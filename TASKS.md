@@ -44,6 +44,16 @@ actual priorities:
 - [x] Verified `gariyuuu.com` and `gariyuuu.com/dashboard` both return live
   `200` responses.
 
+## Completed (2026-08-09 session)
+
+- [x] Cross-checked `src/lib/projects.ts` against `~/Projects/SCOPE.md` and
+  added 3 missing live projects (Deckhouse, Voidshift, Edge Terminal),
+  curl-verifying each URL returns 200 first.
+- [x] Fixed Heart//Break Academy, which was listed unreleased (`url: null`)
+  despite being live at heartbreak-academy.vercel.app.
+- [x] Ran `tsc --noEmit` and `npm run build` clean; committed locally
+  (`a27ea2b`), did not push.
+
 ## Completed (reconstructed from git log, pre-dating this session)
 
 See `SESSION_LOG.md` and `CHANGELOG.md` for the full reconstructed history —

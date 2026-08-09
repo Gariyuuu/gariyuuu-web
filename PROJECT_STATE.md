@@ -94,3 +94,14 @@ This session added real content to those 2 and created the other 15:
    above), so treat "what's on `main`" as something to re-verify, not assume.
 3. Push the documentation commit this session made (this session was told not
    to push — that's the user's call) once the user confirms.
+
+## 2026-08-09 update — projects.ts sync
+
+A later session cross-referenced `src/lib/projects.ts` against a fresh
+portfolio-wide scope audit (`~/Projects/SCOPE.md`) and found it stale: 3 live
+projects were missing entirely (Deckhouse, Voidshift, Edge Terminal — all
+curl-verified 200 before adding) and Heart//Break Academy was still marked
+`url: null` despite being live. All 4 fixed. `tsc`/`build` clean. Commit
+`a27ea2b`, **not pushed** (repo rule: push is the user's call). No screenshots
+exist yet for the 4 new/fixed entries — they render with the "No preview yet"
+placeholder until screenshots are added.

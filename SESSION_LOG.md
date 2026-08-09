@@ -73,3 +73,12 @@ series of separate sessions across days. Listed oldest-first:
   Expanded to 9 full-screen tiled windows with a shake animation — this is
   the change this documentation session found pending and committed (see
   above; landed under this message via the process noted in the anomaly).
+- **2026-08-09 — Add Deckhouse, Voidshift, Edge Terminal; fix Heart//Break
+  Academy live URL.** `src/lib/projects.ts` was missing 3 shipped projects
+  (curl-verified 200: deckhouse-three.vercel.app, voidshift-sigma.vercel.app,
+  edge-terminal-fawn.vercel.app) and still listed Heart//Break Academy as
+  unreleased (`url: null`) despite it being live at
+  heartbreak-academy.vercel.app. All 4 entries added/fixed with
+  `screenshot: null` (no screenshots exist yet for these). `npx tsc --noEmit`
+  and `npm run build` both clean. Committed locally (`a27ea2b`), not pushed —
+  per this repo's own rule, push is the user's call.
