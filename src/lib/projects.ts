@@ -169,7 +169,7 @@ export const PROJECTS: Project[] = [
     slug: "together-wellness",
     name: "Together Wellness",
     description: "Private app for a couple to connect Oura Ring accounts and share sleep/health data.",
-    url: "https://together-wellness.vercel.app",
+    url: "https://together-wellness-garywangsmes-8349s-projects.vercel.app",
     screenshot: "/screenshots/together-wellness.png",
     onAiPlatform: false,
   },
