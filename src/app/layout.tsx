@@ -11,11 +11,27 @@ const hackerFont = Share_Tech_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://gariyuuu.com";
+const TITLE = "Gary Wang — gariyuuu.com";
+const DESCRIPTION =
+  "Personal site and self-hosted AI platform (Yuu v1.1 / Qwen3-8B) powering Gary Wang's apps.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://gariyuuu.com"),
-  title: "Gary Wang — gariyuuu.com",
-  description:
-    "Personal site and self-hosted AI platform (Yuu v1.1 / Qwen3-8B) powering Gary Wang's apps.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: "gariyuuu.com",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
