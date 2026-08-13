@@ -23,6 +23,24 @@ actual priorities:
 - [ ] `phone-watchdog-web` has no screenshot (password-protected, documented
   inline in `projects.ts`) — acceptable as-is, just noting it's not an
   oversight.
+- [ ] 13 new `projects.ts` entries added 2026-08-13 have no screenshots yet
+  (AtlasYuu, Bite Map, ChatCut, Yuu Jarvis, Application HQ, Project Library,
+  Helm, Latticework, MacMine Lab, Messenger, World Monitor, Yuuki, Session OS)
+  — render with the "No preview yet" placeholder, matching the existing
+  Deckhouse/Voidshift/Edge Terminal precedent until real screenshots exist.
+- [ ] Tell the user: QuantDesk's own `README.md` claims it's live at
+  `quantdesk-eta.vercel.app`, but that URL returns a real Vercel 404 on
+  curl (not an auth redirect) — listed as `url: null` in `projects.ts`
+  rather than trusted. Either the QuantDesk deploy needs fixing or its
+  README needs correcting.
+- [ ] Tell the user: `bite-map.vercel.app`, `helm.vercel.app`, and
+  `project-messenger.vercel.app` are all name-collisions with unrelated
+  third-party sites, not Gary's projects, despite returning HTTP 200 with
+  plausible-looking titles. The real production URLs used in `projects.ts`
+  are `bite-map-lyart.vercel.app`, `helm-lovat-theta.vercel.app`, and
+  `project-messenger-gamma.vercel.app` (confirmed via `vercel project ls`
+  + full-body diff). Worth knowing in case any external links/bookmarks
+  point at the wrong vanity domain.
 
 ## Completed (this session — 2026-08-07, documentation session)
 
@@ -53,6 +71,22 @@ actual priorities:
   despite being live at heartbreak-academy.vercel.app.
 - [x] Ran `tsc --noEmit` and `npm run build` clean; committed locally
   (`a27ea2b`), did not push.
+
+## Completed (2026-08-13 session)
+
+- [x] Cross-checked `src/lib/projects.ts` against a fresh
+  `~/Projects/PROJECTS_INVENTORY.md` (19 new folders since the 2026-08-09
+  sync) and investigated all 19 for a live, working URL.
+- [x] Added 13 verified-live entries and 4 in-progress (`url: null`)
+  entries; skipped `edge-terminal` (already present) and
+  `session-os-landing` (folded into the `session-os` entry).
+- [x] Caught 3 wrong vanity-domain guesses (bite-map/helm/project-messenger
+  `.vercel.app`) by diffing full page bodies against `vercel project ls`'s
+  real production URLs, rather than trusting a matching HTTP 200 + title.
+- [x] Caught QuantDesk's own README overclaiming a live URL that 404s on
+  curl; listed `url: null` instead of trusting the doc.
+- [x] Ran `npx tsc --noEmit` and `npm run lint` clean; committed locally
+  (`f411695`), did not push.
 
 ## Completed (reconstructed from git log, pre-dating this session)
 

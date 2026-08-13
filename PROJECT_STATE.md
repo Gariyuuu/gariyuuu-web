@@ -105,3 +105,63 @@ curl-verified 200 before adding) and Heart//Break Academy was still marked
 `a27ea2b`, **not pushed** (repo rule: push is the user's call). No screenshots
 exist yet for the 4 new/fixed entries — they render with the "No preview yet"
 placeholder until screenshots are added.
+
+## 2026-08-13 update — projects.ts sync (13 new entries)
+
+Another session cross-referenced `~/Projects/PROJECTS_INVENTORY.md` (refreshed
+same day) against `src/lib/projects.ts` and found 19 new project folders had
+appeared since 2026-08-09, none represented. Investigated all 19 (branch was
+`chore/metadata-og`, mid-flight on an unrelated OG-image feature —
+`src/app/layout.tsx`/`robots.ts`/`sitemap.ts` were deliberately left untouched
+per the task's own instruction; only `src/lib/projects.ts` was touched).
+
+**Verified live and added (13):**
+- AI-platform-backed (confirmed via `.env.example` pointing at
+  `api.gariyuuu.com`): AtlasYuu (`atlasyuu.vercel.app`), Bite Map
+  (`bite-map-lyart.vercel.app`), ChatCut / project-chatcut
+  (`project-chatcut.fly.dev`), Yuu Jarvis (`yuu-jarvis.vercel.app`)
+- Other live: Application HQ (`application-hq.vercel.app`), Project Library /
+  complete-shelf-demo (`project-library.vercel.app`), Helm
+  (`helm-lovat-theta.vercel.app`), Latticework (`latticework-gilt.vercel.app`),
+  MacMine Lab (`macmine-lab.vercel.app`), Messenger / project-messenger
+  (`project-messenger-gamma.vercel.app`), World Monitor / project-worldmonitor
+  (`project-worldmonitor.vercel.app`), Yuuki / project-yuuki
+  (`project-yuuki.vercel.app`), Session OS (`session-os-landing.vercel.app` —
+  the real product is a local-first VS Code extension/daemon; the landing
+  page is its only public web surface, so that URL represents the product
+  rather than a separate `session-os-landing` entry)
+
+**Added as in-progress, `url: null` (4):** Kinetic (camera hand-tracking
+controller, no git remote, no web deploy), Lemon / project-lemon (native
+macOS voice assistant), Project Tally (SwiftUI, not yet compiled — no full
+Xcode on this machine), QuantDesk (see anomaly below).
+
+**Skipped:** `edge-terminal` (already present). `session-os-landing` folded
+into the `session-os` entry above rather than double-listed, matching the
+existing `hyperliquid-bot`/`hyperliquid-bot-web` precedent of one entry per
+product.
+
+**Anomaly worth flagging — 3 wrong vanity-domain guesses caught by content
+verification, not just status code:** `bite-map.vercel.app`,
+`helm.vercel.app`, and `project-messenger.vercel.app` all return real `200`
+pages with plausible-looking titles ("Bite Map", "Messenger"), but are
+**unrelated sites** — someone else's Vite/bolt.new app for the first two, a
+stranger's personal site ("Willy's Website" / "Wilhelm's website") for
+`helm.vercel.app`. Caught by diffing full page bodies against
+`vercel project ls`'s actual "Latest Production URL" for each project (which
+required an authenticated `vercel` CLI session in the `garywangsmes-8349s-projects`
+scope). Do not trust a matching HTTP 200 + plausible title alone for any
+future sync — always cross-check against `vercel project ls` or the repo's
+own `.vercel/project.json` + a full-body diff.
+
+**Anomaly #2 — QuantDesk's own README claims a live URL that isn't:**
+`quantdesk/README.md` states "Live: quantdesk-eta.vercel.app," but curling
+that URL returns a genuine Vercel `404` (`x-vercel-cache: HIT`, a real
+cached 404 page, not a Clerk auth redirect disguised as one). Listed
+QuantDesk with `url: null` rather than trust the README's claim — the user
+should be told this so the QuantDesk repo's own docs can be corrected or the
+deploy fixed.
+
+`tsc --noEmit` and `eslint` both clean. Committed locally (`f411695`), not
+pushed (repo rule: push is the user's call). No screenshots for any of the
+13 new entries — all render with the "No preview yet" placeholder.

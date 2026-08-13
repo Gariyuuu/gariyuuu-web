@@ -82,3 +82,58 @@ series of separate sessions across days. Listed oldest-first:
   `screenshot: null` (no screenshots exist yet for these). `npx tsc --noEmit`
   and `npm run build` both clean. Committed locally (`a27ea2b`), not pushed —
   per this repo's own rule, push is the user's call.
+
+- **2026-08-13 — Sync `projects.ts` with 19 new portfolio folders.** Ran on
+  branch `chore/metadata-og`, which had unrelated, uncommitted OG-image work
+  in progress (`src/app/layout.tsx` modified, `src/app/robots.ts` and
+  `src/app/sitemap.ts` untracked) — left those three files untouched all
+  session, per the task's explicit scope; only `src/lib/projects.ts` was
+  staged/committed.
+
+  Cross-referenced `~/Projects/PROJECTS_INVENTORY.md` (refreshed same day),
+  which listed 19 new folders since the last sync. Investigated each one
+  individually — `.vercel/project.json`, `fly.toml`, README/package.json,
+  git remotes/log — then curl-verified every live-URL candidate directly
+  rather than trusting the inventory doc, prior-session memory notes, or a
+  name-guessed vanity domain.
+
+  Two verification traps caught along the way, worth remembering for the
+  next sync:
+  1. **Vanity-domain guessing is not safe even when it returns a matching
+     200 + plausible title.** `bite-map.vercel.app`, `helm.vercel.app`, and
+     `project-messenger.vercel.app` are all real, unrelated third-party
+     sites that happen to occupy those names — not Gary's deployments. Only
+     caught by running `vercel project ls` (authenticated CLI session,
+     `garywangsmes-8349s-projects` scope) to get each project's actual
+     "Latest Production URL," then diffing full response bodies to confirm.
+     Real URLs: `bite-map-lyart.vercel.app`, `helm-lovat-theta.vercel.app`,
+     `project-messenger-gamma.vercel.app`.
+  2. **A project's own README can overclaim.** `quantdesk/README.md` states
+     "Live: quantdesk-eta.vercel.app," but that URL returns a genuine
+     Vercel `404` (checked headers — real cached 404, not a Clerk sign-in
+     redirect wearing a 404 status). Listed QuantDesk with `url: null`
+     instead and flagged the discrepancy in `TASKS.md` for the user.
+
+  Added 13 live entries (4 confirmed calling `api.gariyuuu.com` via
+  `.env.example`, so grouped into the "Running on the self-hosted AI
+  platform" section: AtlasYuu, Bite Map, ChatCut/project-chatcut, Yuu
+  Jarvis; 9 into "Other live projects": Application HQ, Project Library
+  (complete-shelf-demo), Helm, Latticework, MacMine Lab,
+  Messenger/project-messenger, World Monitor/project-worldmonitor,
+  Yuuki/project-yuuki, Session OS). Session OS uses the
+  `session-os-landing.vercel.app` URL — the actual product (a VS Code
+  extension + local daemon) is local-first with no public web app, so its
+  landing page is the only thing that could be verified live; a separate
+  `session-os-landing` entry was deliberately not added, matching the
+  existing `hyperliquid-bot`/`hyperliquid-bot-web` one-entry-per-product
+  precedent.
+
+  Added 4 in-progress entries (`url: null`, no live web deploy found or
+  expected): Kinetic (camera hand-tracking, no git remote at all), Lemon /
+  project-lemon (native macOS voice assistant), Project Tally (SwiftUI, not
+  yet compiled — no full Xcode on this machine), QuantDesk (see anomaly #2
+  above).
+
+  Skipped `edge-terminal` (already present, untouched). `npx tsc --noEmit`
+  and `npm run lint` both clean. Committed locally (`f411695`), not pushed —
+  per this repo's own rule, push is the user's call.
