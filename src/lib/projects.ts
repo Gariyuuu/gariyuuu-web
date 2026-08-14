@@ -80,7 +80,7 @@ export const PROJECTS: Project[] = [
     name: "AtlasYuu",
     description: "Travel command center - world map, couples journal, photo memory boards, and AI trip planning via Yuu.",
     url: "https://atlasyuu.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/atlasyuu.png",
     onAiPlatform: true,
   },
   {
@@ -88,7 +88,7 @@ export const PROJECTS: Project[] = [
     name: "Bite Map",
     description: "Food exploration OS - interactive restaurant map, food journal, photo scrapbook, and an AI concierge.",
     url: "https://bite-map-lyart.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/bite-map.png",
     onAiPlatform: true,
   },
   {
@@ -96,7 +96,7 @@ export const PROJECTS: Project[] = [
     name: "ChatCut",
     description: "Private fork of OpenChatCut, an AI-assisted, transcript-driven video editor.",
     url: "https://project-chatcut.fly.dev",
-    screenshot: null,
+    screenshot: "/screenshots/project-chatcut.png",
     onAiPlatform: true,
   },
   {
@@ -104,7 +104,7 @@ export const PROJECTS: Project[] = [
     name: "Yuu Jarvis",
     description: "Personal AI command system built on OpenJarvis for tracking concurrent Claude Code sessions.",
     url: "https://yuu-jarvis.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/yuu-jarvis.png",
     onAiPlatform: true,
   },
 
@@ -178,7 +178,7 @@ export const PROJECTS: Project[] = [
     name: "Deckhouse",
     description: "Social multiplayer card game hub - poker and blackjack playable now, more games coming.",
     url: "https://deckhouse-three.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/deckhouse.png",
     onAiPlatform: false,
   },
   {
@@ -186,7 +186,7 @@ export const PROJECTS: Project[] = [
     name: "Voidshift",
     description: "Multiplayer social-deduction game in the spirit of Among Us, with full roles, maps, tasks, and AI players.",
     url: "https://voidshift-sigma.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/voidshift.png",
     onAiPlatform: false,
   },
   {
@@ -194,7 +194,7 @@ export const PROJECTS: Project[] = [
     name: "Edge Terminal",
     description: "Prediction-market (Kalshi/Polymarket) +EV scanner and paper-trading terminal for sports markets.",
     url: "https://edge-terminal-fawn.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/edge-terminal.png",
     onAiPlatform: false,
   },
   {
@@ -250,7 +250,7 @@ export const PROJECTS: Project[] = [
     name: "Heart//Break Academy",
     description: "Anime-psychological RPG with Undertale-style bullet-dodging combat and visual-novel dialogue.",
     url: "https://heartbreak-academy.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/heartbreak-academy.png",
     onAiPlatform: false,
   },
   {
@@ -282,7 +282,7 @@ export const PROJECTS: Project[] = [
     name: "Application HQ",
     description: "Tracker for an entire grad-school and job-application pipeline, from prospects to offers.",
     url: "https://application-hq.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/application-hq.png",
     onAiPlatform: false,
   },
   {
@@ -290,7 +290,7 @@ export const PROJECTS: Project[] = [
     name: "Project Library",
     description: "3D interactive bookshelf portfolio site.",
     url: "https://project-library.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/complete-shelf-demo.png",
     onAiPlatform: false,
   },
   {
@@ -298,7 +298,7 @@ export const PROJECTS: Project[] = [
     name: "Helm",
     description: "Personal command center / Life OS unifying school, career, research, and personal life into one ranked priority view.",
     url: "https://helm-lovat-theta.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/helm.png",
     onAiPlatform: false,
   },
   {
@@ -306,7 +306,7 @@ export const PROJECTS: Project[] = [
     name: "Latticework",
     description: "SWE/quant/ML learning platform with dozens of hands-on skills and a sandboxed code runner.",
     url: "https://latticework-gilt.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/latticework.png",
     onAiPlatform: false,
   },
   {
@@ -314,7 +314,7 @@ export const PROJECTS: Project[] = [
     name: "MacMine Lab",
     description: "Local, transparent Monero/RandomX mining laboratory and dashboard for Apple Silicon Macs.",
     url: "https://macmine-lab.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/macmine-lab.png",
     onAiPlatform: false,
   },
   {
@@ -322,7 +322,7 @@ export const PROJECTS: Project[] = [
     name: "Messenger",
     description: "Clean-room tiny-planet exploration game - walk a curved world and carry hand-written messages between NPCs, with realtime multiplayer presence.",
     url: "https://project-messenger-gamma.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/project-messenger.png",
     onAiPlatform: false,
   },
   {
@@ -330,7 +330,7 @@ export const PROJECTS: Project[] = [
     name: "World Monitor",
     description: "Private fork of an open-source real-time global intelligence dashboard - news, geopolitical, and infrastructure monitoring.",
     url: "https://project-worldmonitor.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/project-worldmonitor.png",
     onAiPlatform: false,
   },
   {
@@ -338,7 +338,7 @@ export const PROJECTS: Project[] = [
     name: "Yuuki",
     description: "Personalized fork of Project AIRI, an AI companion / virtual character app.",
     url: "https://project-yuuki.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/project-yuuki.png",
     onAiPlatform: false,
   },
   {
@@ -346,7 +346,7 @@ export const PROJECTS: Project[] = [
     name: "Session OS",
     description: "Local-first session tracker for concurrent Claude Code sessions across projects, terminals, and VS Code windows.",
     url: "https://session-os-landing.vercel.app",
-    screenshot: null,
+    screenshot: "/screenshots/session-os.png",
     onAiPlatform: false,
   },
 
