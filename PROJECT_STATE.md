@@ -165,3 +165,74 @@ deploy fixed.
 `tsc --noEmit` and `eslint` both clean. Committed locally (`f411695`), not
 pushed (repo rule: push is the user's call). No screenshots for any of the
 13 new entries — all render with the "No preview yet" placeholder.
+
+## 2026-08-14 update — screenshots added + local-only labeling fixed
+
+Two independent pieces of work this session, both against `src/lib/projects.ts`
+and (for the second) `src/components/project-card.tsx`.
+
+**Part 1 — screenshots.** 17 entries had `screenshot: null` despite having
+verified-live URLs (already curl'd 200 by prior sessions, not re-verified
+here): atlasyuu, bite-map, project-chatcut, yuu-jarvis, deckhouse, voidshift,
+edge-terminal, heartbreak-academy, application-hq, complete-shelf-demo, helm,
+latticework, macmine-lab, project-messenger, project-worldmonitor,
+project-yuuki, session-os. Captured all 17 with `npx playwright screenshot`
+(1280x800 viewport, `--wait-for-timeout=3000`), saved to
+`public/screenshots/<slug>.png`, wired into `projects.ts`. Every PNG was
+visually inspected (read back as an image) before wiring in — all showed real
+UI, not blank/error pages.
+
+Two needed a second pass with a hand-written `.mjs` Playwright script
+(`waitUntil: "networkidle"` + `waitForTimeout(5000)`, same fix previously used
+for trading-professor/anime-sim) because the default CLI wait wasn't enough:
+- `atlasyuu` — first capture caught a splash/intro overlay ("click anywhere to
+  continue") half-transitioning over the real dashboard; the longer wait let
+  it settle to the clean dashboard view.
+- `complete-shelf-demo` — first capture showed genuinely blurred foreground
+  text (scroll-reveal animation mid-fade); re-capture confirmed the blur on
+  the nav/subtitle is actually an intentional design layer (the main heading,
+  description, and CTA button are sharp in both captures) — kept as-is, not a
+  bug.
+
+`phone-watchdog-web` was deliberately left `screenshot: null` per its existing
+inline comment (password-protected, no preview possible) — not touched.
+Committed separately from Part 2, commit `6988b73`.
+
+**Part 2 — local-only vs. unfinished labeling.** `project-card.tsx` rendered
+"Not deployed yet" for any entry with `url: null`, which conflated genuinely
+unfinished projects with projects that are complete but architected to never
+have a public URL (native apps, LAN-only tools). Added an optional
+`localOnly?: boolean` field to the `Project` interface (with an inline comment
+explaining the distinction) and set it `true` on exactly 3 entries, each
+verified against that project's own docs before flagging:
+- `friday` — its own `DEPLOYMENT.md`: "FRIDAY is a personal, local-first app.
+  There is no hosted web deployment."
+- `sports-betting-project` — its own `DEPLOYMENT.md`: "nothing in this
+  repository is deployed to any hosting platform... fully local,
+  personal-use toolset."
+- `kinetic` — its own `CURRENT_STATE.md`: camera + hand-tracking confirmed
+  live across 10 sessions, 172/172 unit tests passing; native macOS tool, no
+  web component possible.
+
+Moved those 3 out of "In progress / not yet deployed" into a new
+`// --- Complete, but local-only (no public URL by design) ---` section,
+positioned after "Other live projects" and before "In progress / not yet
+deployed". `project-card.tsx` now renders "Local app — no public demo" for
+`localOnly` entries instead of "Not deployed yet".
+
+**Deliberately left untouched** (genuinely unfinished, verified against their
+own docs, still show plain "Not deployed yet"): `project-tally` (README:
+"not yet compiled or run", blocked on missing full Xcode), `project-lemon`
+(HANDOFF.md: "Not yet compiled and run", re-confirmed this session via a live
+`swift build` attempt that still fails on a real SwiftPM linker error),
+`red-light-chamber` (PROJECT_STATE.md: `apps/web` "scaffolded as an empty
+directory and never populated" — no playable UI at all), `quantdesk`
+(infra IS deployed but public URL is blocked by a Vercel SSO wall + Clerk
+domain rejection — a real broken public experience, not a local-only design
+choice; out of scope to fix per the task, and a prior attempt to touch that
+Vercel project's settings was blocked by the permission system).
+
+`npx tsc --noEmit`, `npm run lint`, and `npm run build` all clean before each
+commit. Committed as 2 commits: `6988b73` (screenshots) and `61f26ff`
+(local-only schema + labeling). **Not pushed** — repo rule, push is the
+user's call. Local `main` is 2 commits ahead of `origin/main`.

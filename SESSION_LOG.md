@@ -137,3 +137,61 @@ series of separate sessions across days. Listed oldest-first:
   Skipped `edge-terminal` (already present, untouched). `npx tsc --noEmit`
   and `npm run lint` both clean. Committed locally (`f411695`), not pushed —
   per this repo's own rule, push is the user's call.
+
+- **2026-08-14 — Add missing screenshots; fix local-only project
+  labeling.** Two independent tasks against `src/lib/projects.ts` and
+  `src/components/project-card.tsx`, verified starting tip `09ead51`
+  matched a clean tree.
+
+  **Screenshots.** 17 entries had `screenshot: null` on already-verified-live
+  URLs: AtlasYuu, Bite Map, ChatCut, Yuu Jarvis, Deckhouse, Voidshift, Edge
+  Terminal, Heart//Break Academy, Application HQ, Project Library, Helm,
+  Latticework, MacMine Lab, Messenger, World Monitor, Yuuki, Session OS.
+  Captured each with `npx playwright screenshot` (1280x800,
+  `--wait-for-timeout=3000`) into `public/screenshots/<slug>.png`. Two needed
+  a second pass via a hand-written `.mjs` script (`waitUntil: "networkidle"` +
+  5s explicit wait, the same fix previously used for
+  trading-professor/anime-sim): `atlasyuu` had caught a splash overlay
+  mid-transition over the real dashboard on the first attempt; the retry
+  cleared it. `complete-shelf-demo` showed blurred nav/subtitle text on both
+  attempts — inspected closely and confirmed it's an intentional blurred
+  background layer (main heading/description/CTA are sharp), not an
+  animation artifact, so kept as-is. Every one of the 17 PNGs was visually
+  read back before wiring the path into `projects.ts` to confirm real
+  content, not blank/error pages. `phone-watchdog-web` was left untouched
+  (`screenshot: null`, password-protected, pre-existing documented reason).
+  Committed alone as `6988b73` so the screenshot change is reviewable
+  independently of the schema change below.
+
+  **Local-only labeling.** `project-card.tsx` rendered "Not deployed yet"
+  for any `url: null` entry, which was misleading for projects that are
+  complete and working but architecturally local-only (no web component,
+  never getting a public URL) — conflating them with genuinely unfinished
+  work. Added `localOnly?: boolean` to the `Project` interface with an
+  inline comment distinguishing the two cases, and verified 3 candidates
+  against each project's own docs before flagging them: `friday`
+  (`DEPLOYMENT.md`: "personal, local-first app... no hosted web
+  deployment"), `sports-betting-project` (`DEPLOYMENT.md`: "fully local,
+  personal-use toolset"), `kinetic` (`CURRENT_STATE.md`: camera/hand-tracking
+  confirmed live across 10 sessions, 172/172 tests passing, native macOS
+  tool). Moved all 3 from "In progress / not yet deployed" into a new
+  `// --- Complete, but local-only (no public URL by design) ---` section
+  (after "Other live projects", before "In progress / not yet deployed").
+  `project-card.tsx` now shows "Local app — no public demo" for `localOnly`
+  entries. Explicitly left 4 others untouched after verifying they're
+  genuinely unfinished/broken, not local-only: `project-tally` (README:
+  code-complete but not yet compiled, blocked on missing full Xcode),
+  `project-lemon` (HANDOFF.md: not yet compiled/run — re-confirmed live
+  this session via a `swift build` attempt that still fails on a real
+  SwiftPM linker error), `red-light-chamber` (`PROJECT_STATE.md`: its web
+  frontend was "scaffolded as an empty directory and never populated"),
+  `quantdesk` (infra is deployed but the public URL is blocked by a Vercel
+  SSO wall + Clerk domain rejection — a real broken public experience, not
+  a local-only design choice; out of scope to fix here). Committed as
+  `61f26ff`.
+
+  `npx tsc --noEmit`, `npm run lint`, and `npm run build` all ran clean
+  before each commit. Only `src/lib/projects.ts`, `src/components/project-
+  card.tsx`, and `public/screenshots/*.png` were touched, per the task's
+  explicit scope. Not pushed — repo rule, push is the user's call. Local
+  `main` is 2 commits ahead of `origin/main` at session end.

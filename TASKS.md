@@ -23,11 +23,6 @@ actual priorities:
 - [ ] `phone-watchdog-web` has no screenshot (password-protected, documented
   inline in `projects.ts`) — acceptable as-is, just noting it's not an
   oversight.
-- [ ] 13 new `projects.ts` entries added 2026-08-13 have no screenshots yet
-  (AtlasYuu, Bite Map, ChatCut, Yuu Jarvis, Application HQ, Project Library,
-  Helm, Latticework, MacMine Lab, Messenger, World Monitor, Yuuki, Session OS)
-  — render with the "No preview yet" placeholder, matching the existing
-  Deckhouse/Voidshift/Edge Terminal precedent until real screenshots exist.
 - [ ] Tell the user: QuantDesk's own `README.md` claims it's live at
   `quantdesk-eta.vercel.app`, but that URL returns a real Vercel 404 on
   curl (not an auth redirect) — listed as `url: null` in `projects.ts`
@@ -87,6 +82,31 @@ actual priorities:
   curl; listed `url: null` instead of trusting the doc.
 - [x] Ran `npx tsc --noEmit` and `npm run lint` clean; committed locally
   (`f411695`), did not push.
+
+## Completed (2026-08-14 session)
+
+- [x] Captured and wired in screenshots for all 17 `projects.ts` entries
+  that were missing them (AtlasYuu, Bite Map, ChatCut, Yuu Jarvis,
+  Deckhouse, Voidshift, Edge Terminal, Heart//Break Academy, Application
+  HQ, Project Library, Helm, Latticework, MacMine Lab, Messenger, World
+  Monitor, Yuuki, Session OS). `phone-watchdog-web` deliberately left
+  `screenshot: null` (password-protected, unchanged).
+- [x] Two captures (atlasyuu, complete-shelf-demo) needed a one-off
+  Playwright `.mjs` script with `waitUntil: "networkidle"` + a 5s explicit
+  wait — the CLI's default wait wasn't enough to clear an intro
+  overlay/animation. Every PNG visually inspected before wiring in.
+- [x] Added `localOnly?: boolean` to the `Project` interface and set it on
+  `friday`, `sports-betting-project`, and `kinetic` — verified each is
+  complete/working but architecturally local-only via that project's own
+  docs (DEPLOYMENT.md x2, CURRENT_STATE.md). Moved all 3 into a new
+  "Complete, but local-only" section.
+- [x] Updated `project-card.tsx` to render "Local app — no public demo" for
+  `localOnly` entries instead of the misleading "Not deployed yet".
+  `project-tally`, `project-lemon`, `red-light-chamber`, and `quantdesk`
+  deliberately left untouched (genuinely unfinished/broken, not local-only).
+- [x] Ran `npx tsc --noEmit`, `npm run lint`, `npm run build` clean before
+  each of 2 commits: `6988b73` (screenshots), `61f26ff` (local-only
+  schema + labeling). Not pushed — user's call.
 
 ## Completed (reconstructed from git log, pre-dating this session)
 
