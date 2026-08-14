@@ -29,7 +29,11 @@ export function ProjectCard({ project }: { project: Project }) {
           )}
         </div>
         <p className="text-sm text-muted">{project.description}</p>
-        {!project.url && <p className="mt-2 text-xs text-muted">Not deployed yet</p>}
+        {!project.url && (
+          <p className="mt-2 text-xs text-muted">
+            {project.localOnly ? "Local app — no public demo" : "Not deployed yet"}
+          </p>
+        )}
       </div>
     </div>
   );

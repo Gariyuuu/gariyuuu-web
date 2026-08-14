@@ -5,6 +5,10 @@ export interface Project {
   url: string | null;
   screenshot: string | null; // path under /public/screenshots, or null
   onAiPlatform: boolean; // true if this app runs on the self-hosted AI platform
+  // Complete and working, but architected to run locally only (native app,
+  // LAN-only tool, etc.) — will never get a public URL. Not the same as
+  // unfinished; only set alongside `url: null` for genuinely-done projects.
+  localOnly?: boolean;
 }
 
 // Live URLs verified directly (curl'd 200, or docs cross-checked against a
@@ -350,15 +354,7 @@ export const PROJECTS: Project[] = [
     onAiPlatform: false,
   },
 
-  // --- In progress / not yet deployed ---
-  {
-    slug: "sports-betting-project",
-    name: "Sports Betting Bot",
-    description: "CLI tool scanning prediction markets vs. sportsbook odds for positive-edge bets.",
-    url: null,
-    screenshot: null,
-    onAiPlatform: true,
-  },
+  // --- Complete, but local-only (no public URL by design) ---
   {
     slug: "friday",
     name: "F.R.I.D.A.Y.",
@@ -366,19 +362,32 @@ export const PROJECTS: Project[] = [
     url: null,
     screenshot: null,
     onAiPlatform: false,
+    localOnly: true,
   },
   {
-    slug: "red-light-chamber",
-    name: "Red Light Chamber",
-    description: "Real-time turn-based 1v1 multiplayer Russian-roulette-style game (early prototype).",
+    slug: "sports-betting-project",
+    name: "Sports Betting Bot",
+    description: "CLI tool scanning prediction markets vs. sportsbook odds for positive-edge bets.",
     url: null,
     screenshot: null,
-    onAiPlatform: false,
+    onAiPlatform: true,
+    localOnly: true,
   },
   {
     slug: "kinetic",
     name: "Kinetic",
     description: "Camera-only hand-tracking controller for the Mac, no dedicated hardware required.",
+    url: null,
+    screenshot: null,
+    onAiPlatform: false,
+    localOnly: true,
+  },
+
+  // --- In progress / not yet deployed ---
+  {
+    slug: "red-light-chamber",
+    name: "Red Light Chamber",
+    description: "Real-time turn-based 1v1 multiplayer Russian-roulette-style game (early prototype).",
     url: null,
     screenshot: null,
     onAiPlatform: false,
