@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { ThinkingOrb } from "thinking-orbs";
 
 interface Message {
   role: "user" | "assistant";
@@ -102,7 +103,15 @@ export function ChatWidget() {
                   : "bg-surface-2 text-foreground")
               }
             >
-              {m.content || (isStreaming && i === messages.length - 1 ? "…" : "")}
+              {m.content ||
+                (isStreaming && i === messages.length - 1 ? (
+                  <span className="inline-flex items-center gap-2">
+                    <ThinkingOrb state="composing" size={20} aria-label="Yuu is composing a reply" />
+                    <span>Thinking…</span>
+                  </span>
+                ) : (
+                  ""
+                ))}
             </div>
           </div>
         ))}
