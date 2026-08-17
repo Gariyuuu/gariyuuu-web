@@ -1,6 +1,8 @@
 # PROJECT_STATE.md
 
-Last updated: 2026-08-07, by a documentation-authoring Claude Code session.
+Last updated: 2026-08-17, by a documentation-audit session.
+
+Current task: **T-001** (blocked: needs user confirmation) — see `TASKS.md`.
 
 ## Where things stand
 
@@ -236,3 +238,31 @@ Vercel project's settings was blocked by the permission system).
 commit. Committed as 2 commits: `6988b73` (screenshots) and `61f26ff`
 (local-only schema + labeling). **Not pushed** — repo rule, push is the
 user's call. Local `main` is 2 commits ahead of `origin/main`.
+
+## 2026-08-17 update — onboard/verify pass, found drift [Verified]
+
+A documentation-audit session (no code changes) re-verified this file against
+current repo state and found it had gone stale on branch/commit facts (the
+"2 commits ahead of `origin/main`" line above is now resolved/outdated —
+superseded by what follows):
+
+- **`main` and `origin/main` are now in sync** at `22f2f0a` ("chore: add
+  robots.txt, sitemap, and OG metadata") — the screenshots/local-only work
+  described above, plus the `chore/metadata-og` OG-image work, are both on
+  `main` and pushed. `chore/metadata-og` as a branch appears superseded/mergeable
+  into `main`'s history at this point; not deleted or touched by this session.
+- **Current checked-out branch is `chore/polish`**, up to date with
+  `origin/chore/polish`, tree clean. It is **1 commit ahead of `main`**:
+  `f1643ee` "feat(chat): add ThinkingOrb loading indicator to chat and usage
+  views" (2026-08-15), which adds the `thinking-orbs` npm package (`^0.3.1`)
+  and touches `src/components/chat-widget.tsx` and
+  `src/components/usage-dashboard.tsx`.
+- This commit is **not on `main`** and therefore, if Vercel deploys from
+  `main` (see `DEPLOYMENT.md`), **not yet in production** — production
+  `gariyuuu.com` and `gariyuuu.com/dashboard` were re-verified live (`200`)
+  on 2026-08-17, but that only confirms `main`'s state is still serving, not
+  that the ThinkingOrb change is live.
+- No PR was found open for `chore/polish` via local git state alone (this
+  session did not check GitHub directly). `[Needs confirmation]`: whether
+  `chore/polish` is meant to be merged to `main` soon, is still in progress,
+  or was abandoned.

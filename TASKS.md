@@ -1,5 +1,13 @@
 # TASKS.md
 
+## Current task
+
+**T-001** (blocked: needs user confirmation) — decide the fate of branch
+`chore/polish` (1 commit ahead of `main`: `f1643ee`, ThinkingOrb loading
+indicator + new `thinking-orbs` dependency). It's not merged to `main` and
+therefore not deployed. `[Needs confirmation]` whether to merge, keep
+iterating, or abandon. See `PROJECT_STATE.md`'s 2026-08-17 update.
+
 ## In progress
 
 - None known. Working tree was clean at the end of this session (after

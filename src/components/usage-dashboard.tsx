@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { ThinkingOrb } from "thinking-orbs";
 
 interface KeyUsage {
   id: string;
@@ -109,7 +110,12 @@ export function UsageDashboard() {
         ))}
       </div>
 
-      {loading && <p className="text-sm text-muted">Loading...</p>}
+      {loading && (
+        <div className="flex items-center gap-2 text-sm text-muted">
+          <ThinkingOrb state="working" size={20} aria-label="Loading usage data" />
+          Loading...
+        </div>
+      )}
       {error && <p className="text-sm text-red-500">{error}</p>}
 
       {totals && (
