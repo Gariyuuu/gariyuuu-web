@@ -9,6 +9,8 @@ dashboard link to. Treat every change as a real deploy.
 Read `HANDOFF.md` first if you're starting a session cold. This file covers
 conventions and rules; `PROJECT_STATE.md` covers exactly where things stand right now.
 
+Current task: **T-001** (blocked: needs user confirmation) — see `TASKS.md`.
+
 ## What this project is
 
 A Next.js 16 (App Router) site with four surfaces:

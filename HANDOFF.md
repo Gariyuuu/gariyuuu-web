@@ -6,6 +6,10 @@ password-gated dashboard showing live usage stats from Gary's self-hosted AI
 platform. Verified live (`200`) on both `/` and `/dashboard` as of
 2026-08-07.
 
+Current task: **T-001** (blocked: needs user confirmation) — branch
+`chore/polish` has an unmerged commit (ThinkingOrb loading indicator); see
+`TASKS.md` and `PROJECT_STATE.md`.
+
 ## Read in this order
 
 1. **This file**, fully.
