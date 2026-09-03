@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./design-system/master.css";
 
 :root {
   --background: #000000;
@@ -10,9 +11,23 @@
   --accent: #00ff8c;
   --accent-2: #00e5ff;
   --accent-fg: #000000;
+
+  /* ---- PORTFOLIO DESIGN SYSTEM · MASTER v1.2 ------------------------------
+   * gariyuuu-web is dark-only. --ring is --accent, the neon green the site
+   * already uses: 13.95:1 worst case across --background/--surface/--surface-2.
+   * C7 -- --border (#16241a) drew every field boundary at 1.16:1. --border is
+   * UNCHANGED (decorative divider, C7's recorded non-fix); --input is a
+   * separate opaque token in the site's own green hue: 3.13:1 worst.
+   * REDUCE -- this repo's policy is JS-ONLY (2 matchMedia gates, no CSS
+   * at-rule), so MASTER's floor cannot conflict with it: the gate governs what
+   * JS animates, the floor governs the CSS side the gate cannot reach. Both
+   * verified in a browser. */
+  --ring: var(--accent);
+  --input: oklch(0.50 0.01 150);
 }
 
 @theme inline {
+  --color-input: var(--input);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);

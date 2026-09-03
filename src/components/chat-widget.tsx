@@ -130,7 +130,7 @@ export function ChatWidget() {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type a message..."
           maxLength={2000}
-          className="flex-1 rounded-full border border-border bg-background px-4 py-2 text-sm outline-none focus:border-accent"
+          className="flex-1 rounded-full border border-input bg-background px-4 py-2 text-sm outline-none focus:border-accent"
         />
         <button
           type="submit"
