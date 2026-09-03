@@ -39,14 +39,14 @@ export function DashboardLoginForm() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
           autoFocus
-          className="rounded-lg border border-border bg-background px-4 py-2 text-sm outline-none focus:border-accent"
+          className="rounded-lg border border-input bg-background px-4 py-2 text-sm outline-none focus:border-accent"
         />
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
-          className="rounded-lg border border-border bg-background px-4 py-2 text-sm outline-none focus:border-accent"
+          className="rounded-lg border border-input bg-background px-4 py-2 text-sm outline-none focus:border-accent"
         />
         <button
           type="submit"
