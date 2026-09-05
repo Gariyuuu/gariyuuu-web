@@ -50,18 +50,21 @@
  * Sized at MASTER's 12px type floor — never below it. */
 .meta {
   font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
-  font-size: var(--text-xs, 0.75rem);
+  /* 12px, MASTER's type floor. garywng.com set this at 11px; raising it to the
+     floor is the one place the flagship moved to meet the system rather than
+     the other way round. */
+  font-size: 0.75rem;
   line-height: 1.35;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
   font-weight: 500;
 }
 .meta-md {
   font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
-  font-size: var(--text-sm, 0.875rem);
+  font-size: 0.8125rem;
   line-height: 1.5;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.05em;
   font-variant-numeric: tabular-nums;
 }
 /* numbers that must not jitter as they change */
@@ -78,23 +81,30 @@
 /* ————— HERO COMPOSITION ————————————————————————
  * eyebrow (.meta) → headline (.brand-display) → subhead (≤58ch)
  * → exactly one primary CTA. Judged in the first three seconds. */
-.brand-display {
-  font-family: var(--font-display, var(--font-sans, system-ui), serif);
-  letter-spacing: -0.03em;
-  line-height: 0.94;
-  text-wrap: balance;
-}
-.brand-hero-title {
-  font-size: clamp(2.5rem, 7vw, 5.25rem);
-}
-.brand-hero-sub {
-  max-width: 58ch;
-  font-size: clamp(1rem, 1.6vw, 1.1875rem);
-  line-height: 1.6;
-  text-wrap: pretty;
-}
-.brand-section-title {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
+/* These sit in @layer components on purpose. As plain unlayered classes they
+   beat Tailwind's layered utilities, so every `leading-*` / `tracking-*` set
+   alongside them was silently ignored — a real bug found on garywng.com, where
+   three separate blocks rendered at the heading line-height regardless of what
+   they asked for. In this layer the values are defaults a utility can override. */
+@layer components {
+  .brand-display {
+    font-family: var(--font-display, var(--font-sans, system-ui), serif);
+    letter-spacing: -0.03em;
+    line-height: 0.94;
+    text-wrap: balance;
+  }
+  .brand-hero-title {
+    font-size: clamp(2.5rem, 7vw, 5.25rem);
+  }
+  .brand-hero-sub {
+    max-width: 58ch;
+    font-size: clamp(1rem, 1.6vw, 1.1875rem);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .brand-section-title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+  }
 }
 
 /* ————— CARD SYSTEM ——————————————————————————————
@@ -189,6 +199,12 @@
 .u-link:hover::after,
 .u-link:focus-visible::after {
   transform: scaleX(1);
+}
+/* leaving retracts to the right — the pen lifts where it finished.
+   Back-ported from garywng.com, which is where this detail was designed. */
+.u-link:not(:hover):not(:focus-visible)::after {
+  transform-origin: right;
+  transition-duration: 117ms;
 }
 
 /* ————— PRESSABLE ————————————————————————————————
