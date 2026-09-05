@@ -79,3 +79,35 @@ No icon library — the few UI dots/indicators (status dots, nav pulse dot)
 are plain styled `<span>`s, not an icon font/SVG set. Screenshots and the
 about-page photo are the only raster imagery, served via `next/image` from
 `/public`.
+
+---
+
+## Shared brand layer (added 2026-09-05, `/overhaul` W10)
+
+`src/app/brand.css` is the portfolio-wide craft layer shared by every personal-brand
+project. It is imported **after** `design-system/master.css` and composes with it:
+radius is read from MASTER's `--radius-*` ramp, motion tokens are namespaced
+`--brand-dur-*` / `--brand-ease-*`, every transition enumerates its properties (G10),
+and it never declares `:focus-visible` — MASTER owns the ring. It carries no hue; the
+site's neon-green tokens are mapped onto the `--brand-*` slots in `globals.css`.
+
+Provides `.meta` / `.meta-md` / `.tnum` (the mono label voice, at MASTER's 12px floor),
+`.brand-card` / `.brand-card-interactive`, the `.media` photography system,
+`.u-link`, `.pressable`, `.brand-rise`, `.status-dot`, `.brand-scroll`, `--elev-1/2/3`.
+
+### The rain is atmosphere, not content
+
+The matrix canvas used to paint near-white glyphs (`rgba(220,220,220,0.85)`) at
+`opacity-50`, which put it at the same visual depth as the hero body copy — the page
+did not read in the first three seconds. It is now tinted to the site's own green,
+runs at `opacity-[0.22]`, sits under a radial scrim at `z-[1]`, and pauses on
+`visibilitychange`. Do not raise it back.
+
+### Hero rule
+
+One primary CTA. `/` previously offered three same-weight pill buttons; the chat demo
+is now the only button and the other two are `.u-link` text links.
+
+**`.brand-hero-title`'s clamp is not used here.** It is sized for a proportional
+display face, and this site sets everything in Share Tech Mono, which is much wider —
+the home `h1` uses its own `clamp(2rem, 4.2vw, 3.5rem)` instead.

@@ -13,7 +13,8 @@ export default function ProjectsPage() {
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-16">
-      <h1 className="mb-2 text-2xl font-semibold tracking-tight">Projects</h1>
+      <p className="meta text-accent">Work</p>
+      <h1 className="mt-2 mb-2 text-3xl font-semibold tracking-[-0.02em] md:text-4xl">Projects</h1>
       <p className="mb-10 text-muted">
         Everything I&apos;ve built and shipped. {PROJECTS.filter((p) => p.onAiPlatform).length} run on{" "}
         <span className="font-medium text-foreground">Yuu v1.1</span>, my self-hosted AI
@@ -28,7 +29,7 @@ export default function ProjectsPage() {
 
       {unreleased.length > 0 && (
         <>
-          <h2 className="mb-4 mt-14 text-sm font-medium uppercase tracking-wider text-muted">
+          <h2 className="meta mt-14 mb-4 text-muted">
             In progress / not yet deployed
           </h2>
           <div className="grid gap-5 sm:grid-cols-2">

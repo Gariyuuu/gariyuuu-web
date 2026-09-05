@@ -93,7 +93,7 @@ const honors = [
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
     <section id={id} className="border-t border-border py-10">
-      <h2 className="mb-6 text-sm font-medium uppercase tracking-wider text-muted">{title}</h2>
+      <h2 className="meta mb-6 text-muted">{title}</h2>
       {children}
     </section>
   );
@@ -128,7 +128,7 @@ export default function AboutPage() {
           className="rounded-full border border-border object-cover"
         />
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight">Gary Wang</h1>
+          <h1 className="text-3xl font-semibold tracking-[-0.02em] md:text-4xl">Gary Wang</h1>
           <p className="mt-1 text-muted">
             Statistics &amp; Economics student at UC Berkeley · Business Analyst &amp;
             Machine Learning Researcher

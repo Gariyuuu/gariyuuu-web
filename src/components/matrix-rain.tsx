@@ -42,6 +42,17 @@ export function MatrixRain({ fast = false }: { fast?: boolean }) {
 
     let frame = 0;
     let raf = 0;
+    // A background animation has no reason to burn a frame budget in a tab
+    // nobody is looking at.
+    function onVisibility() {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+      } else {
+        raf = requestAnimationFrame(draw);
+      }
+    }
+    document.addEventListener("visibilitychange", onVisibility);
+
     function draw() {
       raf = requestAnimationFrame(draw);
       const settings = fastRef.current ? FAST : SLOW;
@@ -56,9 +67,11 @@ export function MatrixRain({ fast = false }: { fast?: boolean }) {
         const x = i * FONT_SIZE;
         const y = drops[i] * FONT_SIZE;
 
-        ctx!.fillStyle = "rgba(220, 220, 220, 0.85)";
+        // Tinted to the site's own green rather than near-white. At white the
+        // rain read as foreground text and competed with the hero copy.
+        ctx!.fillStyle = "rgba(150, 236, 190, 0.72)";
         ctx!.fillText(randomNumber(), x, y);
-        ctx!.fillStyle = "rgba(140, 140, 140, 0.22)";
+        ctx!.fillStyle = "rgba(90, 150, 118, 0.20)";
         for (let t = 1; t <= settings.trailCount; t++) {
           ctx!.fillText(randomNumber(), x, y - t * FONT_SIZE);
         }
@@ -74,15 +87,29 @@ export function MatrixRain({ fast = false }: { fast?: boolean }) {
 
     return () => {
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVisibility);
       cancelAnimationFrame(raf);
     };
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-50"
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-[0.22]"
+      />
+      {/* A scrim between the rain and the content. Without it the rain sits at
+          the same visual depth as the body copy and the page fails to read in
+          the first three seconds. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-[1]"
+        style={{
+          background:
+            "radial-gradient(120% 80% at 50% 30%, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 45%, rgba(0,0,0,0.35) 100%)",
+        }}
+      />
+    </>
   );
 }

@@ -1,0 +1,287 @@
+/* ============================================================================
+ * GARY WANG — SHARED BRAND LAYER  (v2)
+ * ----------------------------------------------------------------------------
+ * One craft language across every personal surface: portfolio (garywng.com),
+ * helm, atlasyuu, bite-map, fitdrop, together-wellness, and the rest of W10.
+ *
+ * COMPOSES WITH ~/Projects/.design-system/MASTER.css — it does not compete
+ * with it:
+ *   · Radius is READ from MASTER's --radius-* ramp, never redeclared. The
+ *     literal fallbacks are for the repos that do not vendor MASTER.
+ *   · Motion tokens are namespaced --brand-* so they cannot collide with
+ *     MASTER's --duration/--ease. MASTER's ramp (120/150/240) is the UI
+ *     state-change voice; these are the slower, editorial brand voice used
+ *     for entrances and photography.
+ *   · Every transition here enumerates its properties (MASTER's G10 rule).
+ *     None of them use transition-all.
+ *   · No --space-* tokens (MASTER § "Why no spacing tokens").
+ *   · Nothing here declares :focus-visible — MASTER owns the focus ring.
+ *
+ * This file carries NO hue. Each app maps its own palette onto the --brand-*
+ * slots at the bottom of its own token block. What is shared is the craft:
+ * elevation, the mono metadata voice, the card and media systems, and the
+ * motion voice.
+ * ========================================================================== */
+
+:root {
+  /* — elevation: three steps, never more ————————————— */
+  --elev-1: 0 1px 2px rgb(0 0 0 / 0.06), 0 1px 1px rgb(0 0 0 / 0.04);
+  --elev-2: 0 6px 16px -6px rgb(0 0 0 / 0.14), 0 2px 6px -2px rgb(0 0 0 / 0.08);
+  --elev-3: 0 20px 48px -16px rgb(0 0 0 / 0.24), 0 6px 16px -8px rgb(0 0 0 / 0.12);
+
+  /* — motion voice: subtle, confident, interruptible ———
+   * Namespaced so MASTER's --duration/--ease stay authoritative for ordinary
+   * UI state changes. These are for entrance, photography and lift. */
+  --brand-dur-instant: 120ms;
+  --brand-dur-fast: 180ms;
+  --brand-dur-base: 320ms;
+  --brand-dur-slow: 560ms;
+  --brand-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --brand-ease-in: cubic-bezier(0.64, 0, 0.78, 0);
+  --brand-ease-in-out: cubic-bezier(0.83, 0, 0.17, 1);
+
+  /* — hue slots: apps override these ————————————————— */
+  --brand-accent: var(--accent, currentColor);
+}
+
+/* ————— METADATA VOICE ————————————————————————————
+ * The strongest cross-project tell: small, mono, uppercase, tracked, tabular.
+ * Eyebrows, section labels, timestamps, counts, units, keycaps.
+ * Sized at MASTER's 12px type floor — never below it. */
+.meta {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: var(--text-xs, 0.75rem);
+  line-height: 1.35;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+.meta-md {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: var(--text-sm, 0.875rem);
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  font-variant-numeric: tabular-nums;
+}
+/* numbers that must not jitter as they change */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ————— STRUCTURE ————————————————————————————————
+ * A hairline is the structural device. Never a heavy divider. */
+.rule {
+  border-top: 1px solid var(--brand-hairline, currentColor);
+}
+
+/* ————— HERO COMPOSITION ————————————————————————
+ * eyebrow (.meta) → headline (.brand-display) → subhead (≤58ch)
+ * → exactly one primary CTA. Judged in the first three seconds. */
+.brand-display {
+  font-family: var(--font-display, var(--font-sans, system-ui), serif);
+  letter-spacing: -0.03em;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+.brand-hero-title {
+  font-size: clamp(2.5rem, 7vw, 5.25rem);
+}
+.brand-hero-sub {
+  max-width: 58ch;
+  font-size: clamp(1rem, 1.6vw, 1.1875rem);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+.brand-section-title {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* ————— CARD SYSTEM ——————————————————————————————
+ * One card. Rest is quiet; hover lifts 2px and firms the border. Only
+ * .brand-card-interactive moves, so static panels stay put. */
+.brand-card {
+  border-radius: var(--radius-2xl, 18px);
+  border: 1px solid var(--brand-card-border, var(--border, transparent));
+  background: var(--brand-card-bg, var(--card, transparent));
+  /* G10: enumerated, not transition-all */
+  transition:
+    border-color var(--brand-dur-base) var(--brand-ease-out),
+    box-shadow var(--brand-dur-base) var(--brand-ease-out),
+    transform var(--brand-dur-base) var(--brand-ease-out);
+}
+.brand-card-interactive {
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .brand-card-interactive:hover {
+    transform: translateY(-2px);
+    border-color: var(--brand-card-border-hover, var(--border-strong, currentColor));
+    box-shadow: var(--elev-2);
+  }
+}
+.brand-card-interactive:active {
+  transform: translateY(0);
+  transition-duration: var(--brand-dur-instant);
+}
+.brand-card-interactive:focus-visible {
+  border-color: var(--brand-card-border-hover, var(--border-strong, currentColor));
+  box-shadow: var(--elev-2);
+}
+
+/* ————— PHOTOGRAPHY / MEDIA SYSTEM ——————————————
+ * Fixed aspect ratios (no CLS), one radius, a slow confident 1.04 push-in.
+ * The frame never moves — only the image inside it. */
+.media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xl, 14px);
+  background: var(--brand-media-bg, var(--muted, transparent));
+  isolation: isolate;
+}
+.media-21x9 { aspect-ratio: 21 / 9; }
+.media-16x9 { aspect-ratio: 16 / 9; }
+.media-3x2  { aspect-ratio: 3 / 2; }
+.media-4x3  { aspect-ratio: 4 / 3; }
+.media-1x1  { aspect-ratio: 1 / 1; }
+.media-4x5  { aspect-ratio: 4 / 5; }
+
+.media > img,
+.media > video,
+.media > .media-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--brand-dur-slow) var(--brand-ease-out);
+}
+@media (hover: hover) {
+  .media-zoom:hover > img,
+  .media-zoom:hover > video,
+  .media-zoom:hover > .media-fill,
+  .brand-card-interactive:hover .media-zoom > img,
+  .brand-card-interactive:hover .media-zoom > .media-fill,
+  .group:hover .media-zoom > img,
+  .group:hover .media-zoom > .media-fill {
+    transform: scale(1.04);
+  }
+}
+
+/* ————— LINK UNDERLINE ————————————————————————————
+ * Draws left → right in the accent. The signature microinteraction. */
+.u-link {
+  position: relative;
+  text-decoration: none;
+}
+.u-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: var(--brand-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--brand-dur-fast) var(--brand-ease-out);
+}
+.u-link:hover::after,
+.u-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ————— PRESSABLE ————————————————————————————————
+ * Every button-like control acknowledges the press inside 120ms.
+ * G10: the property list is spelled out, including transform, which
+ * --transition-ui deliberately does not carry. */
+.pressable {
+  transition:
+    transform var(--brand-dur-fast) var(--brand-ease-out),
+    background-color var(--brand-dur-fast) var(--brand-ease-out),
+    border-color var(--brand-dur-fast) var(--brand-ease-out),
+    color var(--brand-dur-fast) var(--brand-ease-out),
+    box-shadow var(--brand-dur-fast) var(--brand-ease-out),
+    opacity var(--brand-dur-fast) var(--brand-ease-out);
+}
+.pressable:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(0.97);
+  transition-duration: var(--brand-dur-instant);
+}
+
+/* ————— STATUS DOT: the one permitted ambient animation ———
+ * Decorative only. It is never the sole signal that work is in progress, so
+ * suppressing it under reduced motion does not violate PLAYBOOK P02. */
+@keyframes brand-status-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full, 9999px);
+  background: var(--brand-accent);
+  animation: brand-status-pulse 2.4s var(--brand-ease-in-out) infinite;
+}
+
+/* ————— ENTRANCE ————————————————————————————————
+ * CSS-only reveal for server-rendered surfaces that need no motion library.
+ * Staggered with --i on the element. Never delays interaction. */
+@keyframes brand-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.brand-rise {
+  animation: brand-rise var(--brand-dur-slow) var(--brand-ease-out) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+/* ————— SCROLLBAR: quiet, never a chrome element ——————— */
+.brand-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border, transparent) transparent;
+}
+.brand-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
+.brand-scroll::-webkit-scrollbar-track { background: transparent; }
+.brand-scroll::-webkit-scrollbar-thumb {
+  background: var(--border, transparent);
+  border-radius: var(--radius-full, 9999px);
+}
+
+/* ————— SAFE AREA (fixed bottom chrome on phones) ————— */
+.safe-bottom {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+/* ————— REDUCED MOTION ————————————————————————————
+ * MASTER's guard already zeroes durations. This block additionally cancels
+ * the transforms themselves, which a duration override cannot reach — a hover
+ * lift with a 0.01ms transition still lifts. Left unlayered and deliberately
+ * narrow (only .brand-* / .media / .pressable), so it can never suppress a
+ * repo's own loading or progress animation (PLAYBOOK P02). */
+@media (prefers-reduced-motion: reduce) {
+  .brand-card,
+  .media > img,
+  .media > video,
+  .media > .media-fill,
+  .u-link::after,
+  .pressable {
+    transition: none !important;
+  }
+  .brand-card-interactive:hover,
+  .pressable:active:not(:disabled) {
+    transform: none !important;
+  }
+  .media-zoom:hover > img,
+  .media-zoom:hover > video,
+  .media-zoom:hover > .media-fill,
+  .brand-card-interactive:hover .media-zoom > img,
+  .brand-card-interactive:hover .media-zoom > .media-fill,
+  .group:hover .media-zoom > img,
+  .group:hover .media-zoom > .media-fill {
+    transform: none !important;
+  }
+  .status-dot { animation: none; }
+  .brand-rise { animation: none; }
+}

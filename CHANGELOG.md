@@ -51,3 +51,29 @@ shows none). Starting with the 0.1.1 patch below, `package.json`'s
   separate documentation session, not yet committed as of this file being
   written (see `PROJECT_STATE.md` for exact status; committing the doc set
   is the last step of that session).
+
+## 2026-09-05 — `/overhaul` W10 polish pass
+
+Presentation only; no API, auth or dashboard logic touched.
+
+- Installed the shared brand layer (`src/app/brand.css`, `src/lib/motion/tokens.ts`)
+  and mapped the site's tokens onto its `--brand-*` slots. See `UI_SYSTEM.md`.
+- **Matrix rain no longer competes with the copy** — green-tinted, `opacity-[0.22]`,
+  a radial scrim between it and the content, and it now pauses when the tab is hidden
+  instead of burning frames forever.
+- Home hero: one primary CTA instead of three same-weight pills; `.meta` eyebrow with
+  a live status dot; the headline got its own mono-aware clamp.
+- **`Nav` became a client component with real active state** — it previously had none
+  at all: no `aria-current`, no highlight for the current page. The active item now
+  carries an accent rule, not colour alone, and the nav scrolls rather than wraps at
+  390px.
+- Project cards moved onto the brand card + 16:9 media system (reserved box, so a
+  screenshot cannot shift the grid as it loads).
+- OG/Twitter card redrawn in the shared family layout (accent rule, eyebrow, title,
+  subtitle, domain footer) while keeping the site's green. Verified by fetching
+  `/opengraph-image` from a running server (200, 45 KB PNG). The byline is omitted on
+  this one card because the title already is the name.
+
+Verified: `npx tsc --noEmit` clean · `npx eslint .` clean · `npm run build` clean.
+Screenshot-checked at 1440×900 and 390×844 on `/`, `/projects`, `/about`, `/chat`,
+`/dashboard` — 0 console errors, 0px horizontal overflow.

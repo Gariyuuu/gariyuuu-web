@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./design-system/master.css";
+@import "./brand.css";
 
 :root {
   --background: #000000;
@@ -51,6 +52,17 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* the site's card, expressed through the shared brand slots so .brand-card
+   and .card agree on edge colour, radius and hover behaviour */
+:root {
+  --brand-accent: var(--accent);
+  --brand-hairline: var(--border);
+  --brand-card-bg: var(--surface);
+  --brand-card-border: var(--border);
+  --brand-card-border-hover: var(--accent);
+  --brand-media-bg: var(--surface-2);
 }
 
 .card {
