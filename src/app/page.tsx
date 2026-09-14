@@ -17,7 +17,7 @@ export default function Home() {
         <h1 className="text-[clamp(2rem,4.2vw,3.5rem)] leading-[1.05] font-semibold tracking-[-0.02em] text-balance">
           A self-hosted AI platform,
           <br />
-          <span className="gradient-text">running my own apps.</span>
+          <span className="glitch" data-text="running my own apps.">running my own apps.</span>
         </h1>
         <p className="brand-hero-sub text-muted">
           Instead of paying per-token for a proprietary API, every app I build talks to{" "}

@@ -7,6 +7,15 @@ version numbers since this project has no release/tag scheme (`git tag`
 shows none). Starting with the 0.1.1 patch below, `package.json`'s
 `version` field is kept in sync.
 
+## 2026-09-14 — RGB static glitch on the hero highlight
+
+### Changed
+- "running my own apps." now uses `.glitch` (globals.css, replacing the unused
+  `.gradient-text`): white text with a red/blue channel split that hard-cuts to
+  red or blue while sliced red/blue copies jump sideways (steps(1), 2.4s loop,
+  under 3 flashes/s). Reduced motion keeps only the still RGB split. The rest of
+  the site stays monochrome; the matrix rain background is unchanged.
+
 ## 2026-09-14 — Monochrome palette, nonchalant boot intro
 
 ### Changed
