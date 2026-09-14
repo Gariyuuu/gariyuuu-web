@@ -90,7 +90,7 @@ production (verify in the Vercel dashboard, not checkable from this repo):
 | Variable | Purpose |
 |---|---|
 | `AI_PLATFORM_BASE_URL` | Base URL for the public chat demo's upstream. |
-| `AI_PLATFORM_DEMO_API_KEY` | Rate-limited key for the public chat demo. |
+| `AI_PLATFORM_DEMO_API_KEY` | Rate-limited key for the public chat demo (visitors are also limited per IP by Vercel Firewall rules on `/api/chat`, see FEATURES.md). |
 | `AI_PLATFORM_ADMIN_URL` | Base URL for the admin usage endpoint. |
 | `AI_PLATFORM_ADMIN_SECRET` | Bearer token for the admin usage endpoint — high-value, grants read access to usage across every app on the AI platform. |
 | `DASHBOARD_PASSWORD` | The shared dashboard password. |

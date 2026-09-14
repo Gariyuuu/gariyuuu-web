@@ -1,6 +1,12 @@
 # PROJECT_STATE.md
 
-## 2026-09-14 update (latest)
+## 2026-09-14 — chat demo limiter (latest)
+
+`/api/chat` now has per-IP Vercel Firewall rate limits (6/min, 40/hour — live, verified 429) and
+server-side history/output caps (12 msgs / 6000 chars forwarded, 300 max_tokens). Details in
+FEATURES.md "Token limiter".
+
+## 2026-09-14 update
 
 `/projects` now lists 149 projects (141 live) in six categories, every live URL re-verified on 2026-09-14 (status + page title), all screenshots WebP under `public/screenshots/`. Deployed via push to `main` this session. The 8 url-less projects' screenshots: see the SESSION_LOG entry. A parallel session switched the theme to monochrome earlier the same day (`2db5d3b`). The older notes below are historical.
 

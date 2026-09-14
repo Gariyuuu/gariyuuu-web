@@ -48,9 +48,17 @@ unnecessarily — the route and streaming logic were read directly instead).
   `AI_PLATFORM_BASE_URL/chat/completions` using a **separate, rate-limited**
   `AI_PLATFORM_DEMO_API_KEY` (distinct from the dashboard's admin secret).
 - Streams via SSE, parsed manually in `parseSSE()` (no SDK dependency).
-- Input caps: 20 messages/conversation, 2000 chars/message, `max_tokens: 400`,
-  reasoning disabled — all enforced server-side in the route, not just the
-  UI.
+- Token limiter (2026-09-14), three layers:
+  1. **Vercel Firewall** (edge, per IP, returns 429): rule "chat-demo burst
+     limit" 6 req/60s and "chat-demo hourly limit" 40 req/3600s, both on path
+     `/api/chat`. Managed with `vercel firewall rules list|edit` +
+     `vercel firewall publish` from this directory — not in code.
+  2. **Route** (`src/app/api/chat/route.ts`): only the newest messages that fit
+     12 messages / 6000 chars are forwarded upstream (older turns are dropped,
+     not rejected), 2000 chars/message, `max_tokens: 300`, reasoning disabled.
+     Worst case ≈1.8k tokens per request.
+  3. **Gateway**: the demo key's own global requests/tokens-per-minute limit on
+     the AI platform (set on the key in `~/Projects/ai-platform`).
 - Model is presented to users as "Yuu v1.1" (rebranded from "Yuu no Sekai"
   on 2026-08-07). This is now a display-only label — the `model` string
   actually sent to the AI platform's `/chat/completions` in

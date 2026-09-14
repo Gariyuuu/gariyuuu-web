@@ -60,8 +60,12 @@ export function ChatWidget() {
       });
 
       if (!res.ok || !res.body) {
-        const body = await res.json().catch(() => ({ error: "Something went wrong." }));
-        setError(body.error ?? "Something went wrong.");
+        const fallback =
+          res.status === 429
+            ? "You're sending messages too fast for this public demo - wait a bit and try again."
+            : "Something went wrong.";
+        const body = await res.json().catch(() => ({ error: fallback }));
+        setError(body.error ?? fallback);
         setMessages(nextMessages);
         setIsStreaming(false);
         return;

@@ -7,6 +7,19 @@ version numbers since this project has no release/tag scheme (`git tag`
 shows none). Starting with the 0.1.1 patch below, `package.json`'s
 `version` field is kept in sync.
 
+## 2026-09-14 — Chat demo token limiter
+
+### Added
+- Vercel Firewall per-IP rate limits on `/api/chat`: 6 requests/minute and
+  40 requests/hour (published to production, 429 when exceeded).
+
+### Changed
+- `/api/chat` forwards only the latest 12 messages / 6000 chars of a
+  conversation and caps replies at 300 tokens (was: full history up to 20
+  messages, 400 tokens).
+- Chat widget shows a "sending too fast" message on 429 instead of
+  "Something went wrong."
+
 ## 2026-09-14 — Slower glitch, static on hover, original rain back
 
 ### Changed

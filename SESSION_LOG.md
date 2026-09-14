@@ -217,3 +217,18 @@ series of separate sessions across days. Listed oldest-first:
 - Demo pictures for the 8 former "No preview yet" projects: real captures for phone-watchdog-web (local dev), red-light-chamber (terminal log of a bot-vs-bot match against the local game server — no web frontend exists), quantdesk (Clerk sign-in page only), kinetic (idle HUD, no camera), sports-betting-project (real `--help`); monochrome title cards (not fake UI) for friday, project-lemon, project-tally (Swift apps need full Xcode to build). No `screenshot: null` entries remain.
 - Verified locally: `tsc`, `lint`, `next build` clean; Playwright on `next start` — 141 images, 0 broken, no horizontal scroll at 1440px or 400px, no console errors.
 - Deliberately NOT listed: auth-walled apps (yuuki-os, yuuki-factory, yuuki-registry, yuuki-qa-matrix, yuuki-release-command, yuuki-knowledge-graph, yuuki-digital-twin, yuuki-synthetic-user-lab), 404s (quantdesk, yuuki-contract-hub, yuuki-data-lab, yuuki-security-lab), personal sites (jessica-site, gary-wang-archive, yuu-dashboard), and duplicate parallel-session builds of the AI-iceberg demos.
+
+## 2026-09-14 — Chat demo token limiter
+
+- **Trigger:** owner saw the Universal gateway key at ~48.6k requests / 34.5M
+  tokens / ~$7.79 on the dashboard and asked for a limiter on the public chat
+  demo so visitors can't burn tokens.
+- **Finding:** the demo uses its own key, not Universal. Universal usage is the
+  local research pipelines (assessai, leangraph, suspense-atlas local call
+  caches alone hold ~27k calls from 2026-09-06..12). Per-key breakdown from the
+  production DB was not pulled (prod read not authorised this session).
+- **Done:** Vercel Firewall rules on `/api/chat` (6/min + 40/hour per IP,
+  published); route trims forwarded history to 12 messages / 6000 chars and
+  `max_tokens` 400→300; widget 429 copy. See FEATURES.md "Token limiter".
+- **Verified:** `tsc --noEmit` + eslint clean; live edge check — 9 rapid GETs to
+  `https://gariyuuu.com/api/chat` returned 405 ×6 then 429 ×3; `/` still 200.
