@@ -46,47 +46,95 @@ body {
   color: var(--foreground);
 }
 
-/* RGB static glitch on the hero highlight: white text that hard-cuts to red
-   or blue while red/blue copies jump sideways in horizontal slices.
-   steps(1) everywhere, so every change is a cut, never a tween. Five flash
-   events per 2.4s loop keeps it under WCAG 2.3.1's 3-flashes-per-second. */
+/* RGB static glitch. One set of keyframes, two voices, told apart by variables:
+     .glitch        the always-on hero highlight: pale blue-white base with
+                    rose / sky channels on a slow 4.8s loop
+     .glitch-hover  any text under the pointer (added by the hover script):
+                    the element's own colour with pure red / white / blue on a
+                    3.2s loop, started on a cut so hovering answers at once
+   steps(1) everywhere, so every change is a cut, never a tween. Both loops
+   stay well under WCAG 2.3.1's 3-flashes-per-second limit. */
 .glitch {
+  --g-base: #dbe3ff;
+  --g-red: #ff5a78;
+  --g-blue: #5b8cff;
   position: relative;
   display: inline-block;
   max-width: 100%;
-  color: #ffffff;
-  text-shadow: -2px 0 #ff2a3d, 2px 0 #2f5bff;
-  animation: glitch-flash 2.4s steps(1) infinite;
+  color: var(--g-base);
+  text-shadow: -2px 0 var(--g-red), 2px 0 var(--g-blue);
+  animation: glitch-flash 4.8s steps(1) infinite, glitch-jitter 4.8s steps(1) infinite;
 }
+.glitch-hover {
+  --g-base: var(--gh-color);
+  --g-red: #ff2a3d;
+  --g-blue: #2f5bff;
+  text-shadow: -2px 0 var(--g-red), 2px 0 var(--g-blue);
+  animation: glitch-flash 3.2s steps(1) -0.256s infinite;
+}
+.glitch-hover--rel { position: relative; }
+
 .glitch::before,
-.glitch::after {
-  content: attr(data-text);
+.glitch::after,
+.glitch-hover--slices::before,
+.glitch-hover--slices::after {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
   pointer-events: none;
   text-shadow: none;
   clip-path: inset(100% 0 0 0);
 }
-.glitch::before { color: #ff2a3d; animation: glitch-slice-red 2.4s steps(1) infinite; }
-.glitch::after { color: #2f5bff; animation: glitch-slice-blue 2.4s steps(1) infinite; }
+.glitch::before,
+.glitch::after { content: attr(data-text); }
+.glitch-hover--slices::before,
+.glitch-hover--slices::after {
+  content: attr(data-glitch-text);
+  /* line the copy up with the element's own content box */
+  padding: inherit;
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+  white-space: inherit;
+  overflow: hidden;
+}
+.glitch::before { color: var(--g-red); animation: glitch-slice-red 4.8s steps(1) infinite; }
+.glitch::after { color: var(--g-blue); animation: glitch-slice-blue 4.8s steps(1) infinite; }
+.glitch-hover--slices::before { color: var(--g-red); animation: glitch-slice-red 3.2s steps(1) -0.256s infinite; }
+.glitch-hover--slices::after { color: var(--g-blue); animation: glitch-slice-blue 3.2s steps(1) -0.256s infinite; }
+
 @keyframes glitch-flash {
-  0%   { color: #ffffff; text-shadow: -2px 0 #ff2a3d, 2px 0 #2f5bff; transform: none; }
-  8%   { color: #ff2a3d; text-shadow: 3px 0 #ffffff, -3px 0 #2f5bff; transform: translateX(-2px); }
-  11%  { color: #ffffff; text-shadow: -2px 0 #ff2a3d, 2px 0 #2f5bff; transform: none; }
-  34%  { color: #2f5bff; text-shadow: -3px 0 #ffffff, 3px 0 #ff2a3d; transform: translateX(2px); }
-  37%  { color: #ffffff; text-shadow: -2px 0 #ff2a3d, 2px 0 #2f5bff; transform: none; }
-  58%  { color: #ffffff; text-shadow: -6px 0 #ff2a3d, 6px 0 #2f5bff; transform: translateX(1px); }
-  61%  { color: #ffffff; text-shadow: -2px 0 #ff2a3d, 2px 0 #2f5bff; transform: none; }
-  82%  { color: #ff2a3d; text-shadow: 2px 0 #2f5bff, -2px 0 #ffffff; transform: translateX(-1px); }
-  84%  { color: #2f5bff; text-shadow: -2px 0 #ff2a3d, 2px 0 #ffffff; transform: translateX(2px); }
-  87%  { color: #ffffff; text-shadow: -2px 0 #ff2a3d, 2px 0 #2f5bff; transform: none; }
+  0%   { color: var(--g-base); text-shadow: -2px 0 var(--g-red), 2px 0 var(--g-blue); }
+  8%   { color: var(--g-red); text-shadow: 3px 0 #ffffff, -3px 0 var(--g-blue); }
+  11%  { color: var(--g-base); text-shadow: -2px 0 var(--g-red), 2px 0 var(--g-blue); }
+  34%  { color: var(--g-blue); text-shadow: -3px 0 #ffffff, 3px 0 var(--g-red); }
+  37%  { color: var(--g-base); text-shadow: -2px 0 var(--g-red), 2px 0 var(--g-blue); }
+  58%  { color: var(--g-base); text-shadow: -6px 0 var(--g-red), 6px 0 var(--g-blue); }
+  61%  { color: var(--g-base); text-shadow: -2px 0 var(--g-red), 2px 0 var(--g-blue); }
+  82%  { color: var(--g-red); text-shadow: 2px 0 var(--g-blue), -2px 0 #ffffff; }
+  84%  { color: var(--g-blue); text-shadow: -2px 0 var(--g-red), 2px 0 #ffffff; }
+  87%  { color: var(--g-base); text-shadow: -2px 0 var(--g-red), 2px 0 var(--g-blue); }
+}
+/* hero only: the hover voice never moves an element, so it cannot fight a
+   button's press or a card's lift */
+@keyframes glitch-jitter {
+  0%   { transform: none; }
+  8%   { transform: translateX(-2px); }
+  11%  { transform: none; }
+  34%  { transform: translateX(2px); }
+  37%  { transform: none; }
+  58%  { transform: translateX(1px); }
+  61%  { transform: none; }
+  82%  { transform: translateX(-1px); }
+  84%  { transform: translateX(2px); }
+  87%  { transform: none; }
 }
 @keyframes glitch-slice-red {
-  0%   { clip-path: inset(100% 0 0 0); transform: none; background: transparent; }
-  8%   { clip-path: inset(12% 0 60% 0); transform: translateX(-7px); background: transparent; }
+  0%   { clip-path: inset(100% 0 0 0); transform: none; }
+  8%   { clip-path: inset(12% 0 60% 0); transform: translateX(-7px); }
   10%  { clip-path: inset(55% 0 20% 0); transform: translateX(5px); }
   11%  { clip-path: inset(100% 0 0 0); transform: none; }
   34%  { clip-path: inset(30% 0 45% 0); transform: translateX(9px); }
@@ -98,21 +146,23 @@ body {
   87%  { clip-path: inset(100% 0 0 0); transform: none; }
 }
 @keyframes glitch-slice-blue {
-  0%   { clip-path: inset(100% 0 0 0); transform: none; background: transparent; color: #2f5bff; }
+  0%   { clip-path: inset(100% 0 0 0); transform: none; background: transparent; color: var(--g-blue); }
   8%   { clip-path: inset(62% 0 14% 0); transform: translateX(6px); }
   11%  { clip-path: inset(100% 0 0 0); transform: none; }
   34%  { clip-path: inset(8% 0 70% 0); transform: translateX(-8px); }
   36%  { clip-path: inset(48% 0 30% 0); transform: translateX(6px); }
   37%  { clip-path: inset(100% 0 0 0); transform: none; }
-  58%  { clip-path: inset(38% 0 40% 0); transform: translateX(10px); background: #2f5bff; color: #ffffff; }
-  61%  { clip-path: inset(100% 0 0 0); transform: none; background: transparent; color: #2f5bff; }
+  58%  { clip-path: inset(38% 0 40% 0); transform: translateX(10px); background: var(--g-blue); color: #ffffff; }
+  61%  { clip-path: inset(100% 0 0 0); transform: none; background: transparent; color: var(--g-blue); }
   84%  { clip-path: inset(18% 0 58% 0); transform: translateX(7px); }
   87%  { clip-path: inset(100% 0 0 0); transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  /* !important beats the design system's reduce floor; keep the still RGB split */
-  .glitch, .glitch::before, .glitch::after { animation: none !important; }
-  .glitch::before, .glitch::after { display: none; }
+  /* !important beats the design system's reduce floor; a still RGB split remains */
+  .glitch, .glitch::before, .glitch::after,
+  .glitch-hover, .glitch-hover--slices::before, .glitch-hover--slices::after { animation: none !important; }
+  .glitch::before, .glitch::after,
+  .glitch-hover--slices::before, .glitch-hover--slices::after { display: none !important; }
 }
 
 /* the site's card, expressed through the shared brand slots so .brand-card

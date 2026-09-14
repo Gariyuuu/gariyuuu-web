@@ -163,6 +163,7 @@ export function BootIntro({ onDone }: { onDone?: () => void }) {
 
   return (
     <div
+      data-no-glitch
       className={
         "fixed inset-0 z-50 flex cursor-pointer flex-col items-center justify-center bg-black px-6 transition-opacity duration-500 " +
         (fading ? "pointer-events-none opacity-0" : "opacity-100") +

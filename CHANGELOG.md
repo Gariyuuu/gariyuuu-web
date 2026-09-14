@@ -7,6 +7,16 @@ version numbers since this project has no release/tag scheme (`git tag`
 shows none). Starting with the 0.1.1 patch below, `package.json`'s
 `version` field is kept in sync.
 
+## 2026-09-14 — Slower glitch, static on hover, original rain back
+
+### Changed
+- Hero glitch slowed to a 4.8s loop and given its own slightly different palette
+  (pale blue-white, rose / sky channels).
+- Any text under a mouse or pen pointer now gets the static glitch
+  (`GlitchHover`, pure red / white / blue, 3.2s loop). Off for touch and reduced motion.
+- Matrix rain restored to its original strength (`opacity-50`, scrim removed), now
+  shaded white → grey → dark grey along each trail.
+
 ## 2026-09-14 — RGB static glitch on the hero highlight
 
 ### Changed

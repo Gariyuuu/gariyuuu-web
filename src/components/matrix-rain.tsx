@@ -7,6 +7,14 @@ const FONT_SIZE = 13;
 const FAST = { throttle: 1, fadeAlpha: 0.035, trailCount: 14 };
 const SLOW = { throttle: 6, fadeAlpha: 0.09, trailCount: 5 };
 
+// White head; the trail steps down from light grey to dark grey.
+const HEAD = "rgba(235, 235, 235, 0.9)";
+function trailShade(t: number, count: number) {
+  const k = t / count;
+  const v = Math.round(190 - k * 130);
+  return `rgba(${v}, ${v}, ${v}, ${(0.34 - k * 0.24).toFixed(3)})`;
+}
+
 function randomNumber() {
   return String(Math.floor(Math.random() * 100));
 }
@@ -67,12 +75,10 @@ export function MatrixRain({ fast = false }: { fast?: boolean }) {
         const x = i * FONT_SIZE;
         const y = drops[i] * FONT_SIZE;
 
-        // Kept a step below the white foreground so the rain never reads as
-        // body text and competes with the hero copy.
-        ctx!.fillStyle = "rgba(200, 200, 200, 0.72)";
+        ctx!.fillStyle = HEAD;
         ctx!.fillText(randomNumber(), x, y);
-        ctx!.fillStyle = "rgba(120, 120, 120, 0.20)";
         for (let t = 1; t <= settings.trailCount; t++) {
+          ctx!.fillStyle = trailShade(t, settings.trailCount);
           ctx!.fillText(randomNumber(), x, y - t * FONT_SIZE);
         }
 
@@ -93,23 +99,10 @@ export function MatrixRain({ fast = false }: { fast?: boolean }) {
   }, []);
 
   return (
-    <>
-      <canvas
-        ref={canvasRef}
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-[0.22]"
-      />
-      {/* A scrim between the rain and the content. Without it the rain sits at
-          the same visual depth as the body copy and the page fails to read in
-          the first three seconds. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-[1]"
-        style={{
-          background:
-            "radial-gradient(120% 80% at 50% 30%, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 45%, rgba(0,0,0,0.35) 100%)",
-        }}
-      />
-    </>
+    <canvas
+      ref={canvasRef}
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-50"
+    />
   );
 }

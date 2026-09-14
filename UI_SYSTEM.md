@@ -102,11 +102,21 @@ Provides `.meta` / `.meta-md` / `.tnum` (the mono label voice, at MASTER's 12px 
 
 ### The rain is atmosphere, not content
 
-The matrix canvas used to paint near-white glyphs (`rgba(220,220,220,0.85)`) at
-`opacity-50`, which put it at the same visual depth as the hero body copy — the page
-did not read in the first three seconds. It is now a mid grey, one step below the foreground,
-runs at `opacity-[0.22]`, sits under a radial scrim at `z-[1]`, and pauses on
-`visibilitychange`. Do not raise it back.
+The matrix canvas was dimmed to `opacity-[0.22]` under a radial scrim in an
+earlier readability pass. On 2026-09-14 the owner asked for the original rain back:
+it runs at `opacity-50` again with no scrim, painted with a white head and a trail that
+steps down through the greys (`trailShade` in `matrix-rain.tsx`). It still pauses on
+`visibilitychange`.
+
+### Static glitch
+
+`.glitch` (the hero's "running my own apps.") and `.glitch-hover` (any text under a
+mouse/pen pointer, added by `components/glitch-hover.tsx`) share one set of `steps(1)`
+keyframes in `globals.css`, told apart by `--g-base/--g-red/--g-blue`. Hero: pale
+blue-white with rose/sky channels, 4.8s loop, slight jitter. Hover: the element's own
+colour with pure red/blue, 3.2s loop, no transform. Leaf text gets sliced copies via
+`data-glitch-text`; anything with its own `::before/::after` gets colour + split only.
+Mark an element `data-no-glitch` to exclude it.
 
 ### Hero rule
 
