@@ -302,7 +302,7 @@ export default function AboutPage() {
     <div className="mx-auto max-w-3xl px-6 pb-24">
       <header className="flex flex-col items-center gap-6 py-20 text-center sm:flex-row sm:text-left">
         <Image
-          src="/photo-2026-09.jpg"
+          src="/avatar-2026-09.jpg"
           alt="Gary Wang"
           width={140}
           height={140}
