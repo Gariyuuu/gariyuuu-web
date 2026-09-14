@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { PROJECTS } from "@/lib/projects";
+import { FEATURED_SLUGS, PROJECTS } from "@/lib/projects";
 import { ProjectCard } from "@/components/project-card";
 
 export default function Home() {
-  const featured = PROJECTS.slice(0, 4);
+  const featured = FEATURED_SLUGS.map((slug) => PROJECTS.find((p) => p.slug === slug)).filter(
+    (p) => p !== undefined,
+  );
 
   return (
     <div className="mx-auto max-w-5xl px-6">

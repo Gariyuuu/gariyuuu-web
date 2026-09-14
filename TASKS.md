@@ -15,6 +15,8 @@ iterating, or abandon. See `PROJECT_STATE.md`'s 2026-08-17 update.
 
 ## Queued / not started
 
+- [ ] Re-verify `/projects` URLs periodically — bare `<name>.vercel.app` domains are often strangers' sites; the source of truth is the Vercel API's production aliases.
+
 Nothing is formally queued in-repo. Candidates inferred from `PROJECT_STATE.md`
 gaps and `ROADMAP.md` — confirm with the user before treating any of these as
 actual priorities:
@@ -24,13 +26,8 @@ actual priorities:
 - [ ] Consider rate-limiting / lockout on `/api/dashboard/auth` (currently
   unlimited login attempts against a single shared password). See
   `SECURITY.md`.
-- [ ] `daily-brief`'s URL in `src/lib/projects.ts` is a Vercel preview-deploy
-  URL (`daily-brief-70cu7npew-garywangsmes-8349s-projects.vercel.app`), not a
-  clean production domain like the other entries — worth confirming that's
-  intentional/still live, or swapping for a stable URL if one exists.
-- [ ] `phone-watchdog-web` has no screenshot (password-protected, documented
-  inline in `projects.ts`) — acceptable as-is, just noting it's not an
-  oversight.
+- [x] ~~`daily-brief` preview URL~~ — fixed 2026-09-14 (`daily-brief-lovat.vercel.app`).
+- [x] ~~`phone-watchdog-web` has no screenshot~~ — addressed 2026-09-14.
 - [ ] Tell the user: QuantDesk's own `README.md` claims it's live at
   `quantdesk-eta.vercel.app`, but that URL returns a real Vercel 404 on
   curl (not an auth redirect) — listed as `url: null` in `projects.ts`

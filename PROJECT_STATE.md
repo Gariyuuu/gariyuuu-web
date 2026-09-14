@@ -1,5 +1,10 @@
 # PROJECT_STATE.md
 
+## 2026-09-14 update (latest)
+
+`/projects` now lists 149 projects (141 live) in six categories, every live URL re-verified on 2026-09-14 (status + page title), all screenshots WebP under `public/screenshots/`. Deployed via push to `main` this session. The 8 url-less projects' screenshots: see the SESSION_LOG entry. A parallel session switched the theme to monochrome earlier the same day (`2db5d3b`). The older notes below are historical.
+
+
 Last updated: 2026-08-17, by a documentation-audit session.
 
 Current task: **T-001** (blocked: needs user confirmation) — see `TASKS.md`.

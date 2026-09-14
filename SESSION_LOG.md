@@ -206,3 +206,14 @@ series of separate sessions across days. Listed oldest-first:
 - **Verified:** eslint + `tsc --noEmit` + `next build` clean; `next start` on a
   free port, title-checked, Playwright captures of boot / flood / crash /
   recover / landing — zero console errors, no green anywhere.
+
+
+## 2026-09-14 — Projects refresh (latest projects + demo pictures)
+
+- `/projects` grew from 49 to 149 entries (141 live). Enumerated every project via the Vercel REST API, curl'd each URL and checked its `<title>` against the project before listing it.
+- Fixed wrong links on existing entries: `careeratlas.vercel.app`, `market-brief.vercel.app`, `puzzle-rush.vercel.app` were strangers' sites (now `careeratlas-ten`, `market-brief-seven`, `puzzle-rush-six`); Daily Brief moved off a preview URL to `daily-brief-lovat`; Together Wellness to `-mauve`. AniBrief (shut down 2026-08-13) is now `archived: true`, `url: null`.
+- New `category` field + `CATEGORIES` in `src/lib/projects.ts`; `/projects` renders one section per category with anchor chips, 3-column grid on lg. Landing page featured list is now explicit (`FEATURED_SLUGS`) instead of `PROJECTS.slice(0, 4)`.
+- Captured 105 new Playwright screenshots (1280x800), retook splash/blank ones (LIVEFRAME, Helm, ChatCut, Trading Professor), converted every screenshot to WebP (`shot(slug)` helper) — 5.5MB total for 141 images vs 9.7MB for the old 41 PNGs.
+- Demo pictures for the 8 "No preview yet" projects produced by a separate capture pass (see PROJECT_STATE.md).
+- Verified locally: `tsc`, `lint`, `next build` clean; Playwright on `next start` — 141 images, 0 broken, no horizontal scroll at 1440px or 400px, no console errors.
+- Deliberately NOT listed: auth-walled apps (yuuki-os, yuuki-factory, yuuki-registry, yuuki-qa-matrix, yuuki-release-command, yuuki-knowledge-graph, yuuki-digital-twin, yuuki-synthetic-user-lab), 404s (quantdesk, yuuki-contract-hub, yuuki-data-lab, yuuki-security-lab), personal sites (jessica-site, gary-wang-archive, yuu-dashboard), and duplicate parallel-session builds of the AI-iceberg demos.

@@ -10,7 +10,7 @@ export function ProjectCard({ project }: { project: Project }) {
             src={project.screenshot}
             alt={`Screenshot of ${project.name}`}
             fill
-            sizes="(max-width: 640px) 100vw, 50vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover object-top"
           />
         ) : (
@@ -31,7 +31,11 @@ export function ProjectCard({ project }: { project: Project }) {
         <p className="text-sm text-muted">{project.description}</p>
         {!project.url && (
           <p className="meta mt-2.5 text-muted">
-            {project.localOnly ? "Local app — no public demo" : "Not deployed yet"}
+            {project.archived
+              ? "Archived — no longer hosted"
+              : project.localOnly
+                ? "Local app — no public demo"
+                : "Not deployed yet"}
           </p>
         )}
       </div>
