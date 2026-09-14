@@ -195,3 +195,14 @@ series of separate sessions across days. Listed oldest-first:
   card.tsx`, and `public/screenshots/*.png` were touched, per the task's
   explicit scope. Not pushed — repo rule, push is the user's call. Local
   `main` is 2 commits ahead of `origin/main` at session end.
+
+## 2026-09-14 — Monochrome palette + nonchalant boot copy
+
+- **Trigger:** owner asked for the site to be "just black, not green" and for
+  the loading page to be "way more nonchalant", keeping the same effects and
+  with no changes to the transitions or animation.
+- **Done:** see CHANGELOG 2026-09-14. Animation code untouched; only colour
+  values and strings changed (same array lengths, so pacing is identical).
+- **Verified:** eslint + `tsc --noEmit` + `next build` clean; `next start` on a
+  free port, title-checked, Playwright captures of boot / flood / crash /
+  recover / landing — zero console errors, no green anywhere.

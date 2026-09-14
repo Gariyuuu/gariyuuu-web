@@ -3,50 +3,50 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 const BOOT_LINES = [
-  "GARIYUUU.COM",
-  "SITE INITIALIZING...",
-  "LOADING MODULES: AI GATEWAY, PROJECTS, CHAT, DASHBOARD...",
-  "ESTABLISHING CONNECTION TO YUU V1.1...",
-  "MOUNTING ASSETS...",
+  "gariyuuu.com",
+  "starting up. no rush.",
+  "loading the usual: ai gateway, projects, chat, dashboard",
+  "pinging yuu v1.1... it's up, probably",
+  "ok cool",
 ];
 
 const FLOOD_LINES = [
-  "SCANNING NETWORK 10.0.0.0/8...",
-  "HOST 10.0.4.17 RESPONDING",
-  "PORT 22 OPEN — SSH HANDSHAKE INITIATED",
-  "PORT 443 OPEN — TLS FINGERPRINT MATCHED",
-  "PORT 3306 OPEN — MYSQL SERVICE DETECTED",
-  "FINGERPRINTING OS: LINUX 6.2.0-KALI",
-  "BRUTE FORCE: 4281/10000 KEYS TESTED",
-  "BRUTE FORCE: 8734/10000 KEYS TESTED",
-  "PASSWORD HASH CRACKED: 5f4dcc3b5aa765d6",
-  "0x4F3A9C1E -> 0x00FF8C -> 0x1A2B3C",
-  "DECRYPTING AES-256 KEYSTORE...",
-  "KEYSTORE UNLOCKED",
-  "INJECTING PAYLOAD [======----] 61%",
-  "INJECTING PAYLOAD [==========] 100%",
-  "BYPASSING FIREWALL RULE 0x12F...",
-  "FIREWALL RULE 0x12F DISABLED",
-  "ACCESS DENIED. RETRYING...",
-  "ACCESS DENIED. RETRYING...",
-  "ACCESS DENIED. RETRYING...",
-  "EXPLOIT CVE-2024-19832 MATCHED",
-  "EXPLOIT CVE-2023-44487 MATCHED",
-  "PRIVILEGE ESCALATION IN PROGRESS...",
-  "ROOT ACCESS GRANTED",
-  "DUMPING /etc/shadow...",
-  "DUMPING SESSION TOKENS...",
-  "EXFILTRATING DATA [==========] 100%",
-  "UPLOADING TO REMOTE HOST 185.23.44.6...",
-  "WARNING: INTRUSION DETECTED",
-  "WARNING: ADMIN NOTIFIED",
-  "COUNTERMEASURES ENGAGED",
-  "REROUTING THROUGH 14 PROXIES...",
-  "SPOOFING MAC ADDRESS...",
-  "WIPING BASH HISTORY...",
-  "CLEARING LOGS...",
-  "DISCONNECTING TRACE...",
-  "SIGNAL LOST",
+  "scanning network... eh, it's fine",
+  "host 10.0.4.17 responding. neat",
+  "port 22 open. leaving it",
+  "port 443 open. that's normal",
+  "port 3306 open. not my problem",
+  "os: linux. cool",
+  "brute force: 4281/10000. no hurry",
+  "brute force: 8734/10000. sure",
+  'hash cracked: 5f4dcc3b. it was "password"',
+  "0x4f3a9c1e -> 0xffffff -> 0x1a2b3c",
+  "decrypting keystore... whenever",
+  "keystore unlocked. ok",
+  "injecting payload [======----] 61%",
+  "injecting payload [==========] 100%",
+  "firewall rule 0x12f... skipped it",
+  "firewall disabled. oops",
+  "access denied. fair",
+  "access denied. also fair",
+  "access denied. anyway",
+  "cve-2024-19832 matched. whatever",
+  "cve-2023-44487 matched. again",
+  "escalating privileges, casually",
+  "root access. didn't really want it",
+  "reading /etc/shadow. boring",
+  "session tokens... skimmed",
+  "copying data [==========] 100%",
+  "uploading somewhere. doesn't matter",
+  "intrusion detected. yeah",
+  "admin notified. they're at lunch",
+  "countermeasures engaged. cute",
+  "rerouting through 14 proxies. scenic route",
+  "spoofing mac address. why not",
+  "wiping bash history",
+  "clearing logs. tidy",
+  "disconnecting trace",
+  "signal lost. that's fine",
 ];
 
 const FLOOD_WINDOWS: { title: string; style: CSSProperties }[] = [
@@ -62,18 +62,18 @@ const FLOOD_WINDOWS: { title: string; style: CSSProperties }[] = [
 ];
 
 const POPUPS: { title: string; message: string; style: CSSProperties }[] = [
-  { title: "System Error", message: "A fatal exception 0E has occurred at 0028:C0011E36.", style: { top: "1%", left: "1%", transform: "rotate(-3deg)" } },
-  { title: "Warning", message: "Virus detected in C:\\WINDOWS\\SYSTEM32\\", style: { top: "3%", left: "48%", transform: "rotate(2deg)" } },
-  { title: "Access Denied", message: "You do not have permission to perform this action.", style: { top: "22%", left: "24%", transform: "rotate(-2deg)" } },
-  { title: "Critical Alert", message: "Unauthorized access detected on this machine.", style: { top: "30%", left: "60%", transform: "rotate(3deg)" } },
-  { title: "Security Warning", message: "Firewall has been disabled remotely.", style: { top: "48%", left: "2%", transform: "rotate(-1deg)" } },
-  { title: "Error", message: "The application has encountered an unknown error.", style: { top: "55%", left: "42%", transform: "rotate(2deg)" } },
-  { title: "Intruder Alert", message: "Multiple failed login attempts detected.", style: { top: "18%", left: "70%", transform: "rotate(-2deg)" } },
-  { title: "System32", message: "Deleting critical system files...", style: { top: "72%", left: "22%", transform: "rotate(1deg)" } },
+  { title: "error", message: "a fatal exception occurred. you can ignore it.", style: { top: "1%", left: "1%", transform: "rotate(-3deg)" } },
+  { title: "warning", message: "virus detected in system32. it seems happy there.", style: { top: "3%", left: "48%", transform: "rotate(2deg)" } },
+  { title: "access denied", message: "you don't have permission. neither do i.", style: { top: "22%", left: "24%", transform: "rotate(-2deg)" } },
+  { title: "alert", message: "unauthorized access detected. noted.", style: { top: "30%", left: "60%", transform: "rotate(3deg)" } },
+  { title: "security", message: "firewall disabled remotely. it'll be fine.", style: { top: "48%", left: "2%", transform: "rotate(-1deg)" } },
+  { title: "error", message: "something went wrong. no idea what.", style: { top: "55%", left: "42%", transform: "rotate(2deg)" } },
+  { title: "fyi", message: "multiple failed logins. happens.", style: { top: "18%", left: "70%", transform: "rotate(-2deg)" } },
+  { title: "system32", message: "deleting system files. they weren't doing much.", style: { top: "72%", left: "22%", transform: "rotate(1deg)" } },
 ];
 
-const CRASH_LINES = ["SYSTEM COMPROMISED", "SYSTEM FAILURE", "CONNECTION TERMINATED"];
-const RECOVER_LINES = ["REBOOTING...", "WELCOME BACK, GARY."];
+const CRASH_LINES = ["welp.", "system failure", "no big deal"];
+const RECOVER_LINES = ["restarting, i guess", "oh. hey."];
 
 type Phase = "boot" | "flood" | "crash" | "recover" | "hidden";
 
@@ -226,7 +226,7 @@ export function BootIntro({ onDone }: { onDone?: () => void }) {
               <p>{p.message}</p>
               <div className="mt-4 flex justify-end">
                 <span className="border border-black bg-gray-300 px-5 py-1 text-sm font-semibold shadow-[2px_2px_0_#000]">
-                  OK
+                  ok
                 </span>
               </div>
             </div>
@@ -266,8 +266,8 @@ export function BootIntro({ onDone }: { onDone?: () => void }) {
       )}
 
       {(phase === "boot" || phase === "flood") && (
-        <p className="mt-10 text-[10px] uppercase tracking-widest text-muted">
-          click / press any key to skip
+        <p className="mt-10 text-[10px] tracking-widest text-muted">
+          click anywhere if you&apos;re bored
         </p>
       )}
     </div>

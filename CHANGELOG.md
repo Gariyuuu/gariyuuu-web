@@ -7,6 +7,16 @@ version numbers since this project has no release/tag scheme (`git tag`
 shows none). Starting with the 0.1.1 patch below, `package.json`'s
 `version` field is kept in sync.
 
+## 2026-09-14 — Monochrome palette, nonchalant boot intro
+
+### Changed
+- Palette is now black / white / greys only — no green, no cyan. Tokens in
+  `globals.css`, matrix rain tint, boot crash flicker (red → dark greys), glitch
+  fringe (cyan → grey), OG/Twitter image colours, dashboard key status dot.
+- Boot intro copy rewritten in a lowercase, deadpan voice ("starting up. no
+  rush.", "welp.", "oh. hey."). Line counts per phase are unchanged, so every
+  phase, timing, transition and animation is exactly as before — copy only.
+
 ## 0.1.1 — 2026-08-07
 
 ### Changed

@@ -51,8 +51,9 @@ via two proxied API routes.
 - **The boot intro plays on every page load, on every route** (mounted in
   `src/app/layout.tsx`, not per-page). If it feels heavy-handed, that's a design
   choice already made — don't silently remove it; ask first.
-- **The theme is a single fixed dark "hacker" palette** (black background, green
-  `--accent` / cyan `--accent-2`, `Share_Tech_Mono` font) defined in
+- **The theme is a single fixed dark "hacker" palette** (monochrome since
+  2026-09-14: black background, white `--accent` / grey `--accent-2`, no hue —
+  `Share_Tech_Mono` font) defined in
   `src/app/globals.css`. An earlier version of this site had a 6-palette
   light/dark theme picker (see git history, commit `40635cf`); it was
   deliberately replaced by the current single dark theme in commit `0d61741`.

@@ -4,27 +4,26 @@
 
 :root {
   --background: #000000;
-  --foreground: #d7f5df;
-  --surface: #060a07;
-  --surface-2: #0d140f;
-  --border: #16241a;
-  --muted: #5f7a68;
-  --accent: #00ff8c;
-  --accent-2: #00e5ff;
+  --foreground: #e6e6e6;
+  --surface: #0a0a0a;
+  --surface-2: #141414;
+  --border: #1f1f1f;
+  --muted: #7a7a7a;
+  --accent: #ffffff;
+  --accent-2: #a3a3a3;
   --accent-fg: #000000;
 
   /* ---- PORTFOLIO DESIGN SYSTEM · MASTER v1.2 ------------------------------
-   * gariyuuu-web is dark-only. --ring is --accent, the neon green the site
-   * already uses: 13.95:1 worst case across --background/--surface/--surface-2.
-   * C7 -- --border (#16241a) drew every field boundary at 1.16:1. --border is
-   * UNCHANGED (decorative divider, C7's recorded non-fix); --input is a
-   * separate opaque token in the site's own green hue: 3.13:1 worst.
+   * gariyuuu-web is dark-only and monochrome (black / white / greys, no hue).
+   * --ring is --accent, plain white: highest possible contrast on every surface.
+   * C7 -- --border is a decorative divider (C7's recorded non-fix); --input is
+   * a separate opaque neutral grey so field boundaries stay visible.
    * REDUCE -- this repo's policy is JS-ONLY (2 matchMedia gates, no CSS
    * at-rule), so MASTER's floor cannot conflict with it: the gate governs what
    * JS animates, the floor governs the CSS side the gate cannot reach. Both
    * verified in a browser. */
   --ring: var(--accent);
-  --input: oklch(0.50 0.01 150);
+  --input: oklch(0.50 0 0);
 }
 
 @theme inline {
@@ -82,13 +81,13 @@ body {
 }
 
 @keyframes boot-crash-flicker {
-  0%, 100% { background-color: #7a0000; transform: translate(0, 0); }
-  15% { background-color: #b30000; transform: translate(-6px, 4px); }
-  30% { background-color: #5c0000; transform: translate(6px, -4px); }
-  45% { background-color: #8f0000; transform: translate(-5px, -6px); }
-  60% { background-color: #400000; transform: translate(5px, 6px); }
-  75% { background-color: #b30000; transform: translate(-6px, 3px); }
-  90% { background-color: #5c0000; transform: translate(6px, -3px); }
+  0%, 100% { background-color: #1c1c1c; transform: translate(0, 0); }
+  15% { background-color: #333333; transform: translate(-6px, 4px); }
+  30% { background-color: #111111; transform: translate(6px, -4px); }
+  45% { background-color: #262626; transform: translate(-5px, -6px); }
+  60% { background-color: #080808; transform: translate(5px, 6px); }
+  75% { background-color: #333333; transform: translate(-6px, 3px); }
+  90% { background-color: #111111; transform: translate(6px, -3px); }
 }
 .animate-boot-crash {
   animation: boot-crash-flicker 0.15s steps(1) infinite;
@@ -111,11 +110,11 @@ body {
 }
 
 @keyframes boot-glitch-shake {
-  0% { transform: translate(0, 0); text-shadow: 2px 0 #000000, -2px 0 #00e5ff; }
-  25% { transform: translate(-3px, 2px); text-shadow: -2px 0 #000000, 2px 0 #00e5ff; }
-  50% { transform: translate(3px, -2px); text-shadow: 2px 0 #00e5ff, -2px 0 #000000; }
-  75% { transform: translate(-2px, -1px); text-shadow: -1px 0 #00e5ff, 1px 0 #000000; }
-  100% { transform: translate(0, 0); text-shadow: 2px 0 #000000, -2px 0 #00e5ff; }
+  0% { transform: translate(0, 0); text-shadow: 2px 0 #000000, -2px 0 #7a7a7a; }
+  25% { transform: translate(-3px, 2px); text-shadow: -2px 0 #000000, 2px 0 #7a7a7a; }
+  50% { transform: translate(3px, -2px); text-shadow: 2px 0 #7a7a7a, -2px 0 #000000; }
+  75% { transform: translate(-2px, -1px); text-shadow: -1px 0 #7a7a7a, 1px 0 #000000; }
+  100% { transform: translate(0, 0); text-shadow: 2px 0 #000000, -2px 0 #7a7a7a; }
 }
 .animate-boot-glitch {
   animation: boot-glitch-shake 0.12s infinite;

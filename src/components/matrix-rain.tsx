@@ -67,11 +67,11 @@ export function MatrixRain({ fast = false }: { fast?: boolean }) {
         const x = i * FONT_SIZE;
         const y = drops[i] * FONT_SIZE;
 
-        // Tinted to the site's own green rather than near-white. At white the
-        // rain read as foreground text and competed with the hero copy.
-        ctx!.fillStyle = "rgba(150, 236, 190, 0.72)";
+        // Kept a step below the white foreground so the rain never reads as
+        // body text and competes with the hero copy.
+        ctx!.fillStyle = "rgba(200, 200, 200, 0.72)";
         ctx!.fillText(randomNumber(), x, y);
-        ctx!.fillStyle = "rgba(90, 150, 118, 0.20)";
+        ctx!.fillStyle = "rgba(120, 120, 120, 0.20)";
         for (let t = 1; t <= settings.trailCount; t++) {
           ctx!.fillText(randomNumber(), x, y - t * FONT_SIZE);
         }

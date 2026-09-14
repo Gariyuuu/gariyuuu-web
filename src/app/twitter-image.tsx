@@ -9,9 +9,9 @@ const TITLE = "Gary Wang";
 const SUBTITLE = "A self-hosted AI platform (Yuu v1.1 / Qwen3-8B) running every app I build.";
 const EYEBROW = "Self-hosted AI platform";
 const BG = "#000000";
-const FG = "#d7f5df";
-const MUTED = "#5f7a68";
-const ACCENT = "#00ff8c";
+const FG = "#e6e6e6";
+const MUTED = "#7a7a7a";
+const ACCENT = "#ffffff";
 /* ------------------------------------------------------------------------ */
 
 export default function OpengraphImage() {

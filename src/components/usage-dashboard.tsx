@@ -160,7 +160,7 @@ export function UsageDashboard() {
                     <td className="px-4 py-3">
                       <span
                         className={
-                          "inline-block h-2 w-2 rounded-full " + (k.enabled ? "bg-green-500" : "bg-red-500")
+                          "inline-block h-2 w-2 rounded-full " + (k.enabled ? "bg-foreground" : "bg-muted/40")
                         }
                       />
                     </td>

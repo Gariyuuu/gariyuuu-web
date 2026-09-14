@@ -11,13 +11,18 @@ Tailwind v4's token system via `@theme inline`:
 | Token | Value | Used for |
 |---|---|---|
 | `--background` | `#000000` | Page background |
-| `--foreground` | `#d7f5df` | Body text (pale green-white) |
-| `--surface` | `#060a07` | `.card` background |
-| `--surface-2` | `#0d140f` | Hover states, secondary surfaces |
-| `--border` | `#16241a` | All borders |
-| `--muted` | `#5f7a68` | Secondary/muted text |
-| `--accent` | `#00ff8c` | Primary accent (green) |
-| `--accent-2` | `#00e5ff` | Secondary accent (cyan), used in gradients |
+| `--foreground` | `#e6e6e6` | Body text (off-white) |
+| `--surface` | `#0a0a0a` | `.card` background |
+| `--surface-2` | `#141414` | Hover states, secondary surfaces |
+| `--border` | `#1f1f1f` | All borders |
+| `--muted` | `#7a7a7a` | Secondary/muted text |
+| `--accent` | `#ffffff` | Primary accent (white) |
+| `--accent-2` | `#a3a3a3` | Secondary accent (grey), used in gradients |
+
+**Monochrome since 2026-09-14** — black / white / greys only, no hue anywhere
+(the owner asked for "just black, not green"). The previous palette was neon
+green `#00ff8c` + cyan `#00e5ff`. The boot crash flicker is dark greys (was red)
+and the dashboard key status dot is white/grey (was green/red).
 | `--accent-fg` | `#000000` | Text on top of accent-colored surfaces |
 
 **There is no light theme and no theme switcher in the current code.** An
@@ -43,7 +48,7 @@ typeface.
 - `.gradient-text` — `linear-gradient(90deg, accent, accent-2)` clipped to
   text. Used for the landing-page headline emphasis.
 - `.neon` — text-shadow glow effect (double-layered, accent-colored). Used
-  sparingly (e.g., the boot intro's "WELCOME BACK, GARY." line).
+  sparingly (e.g., the boot intro's "oh. hey." line).
 
 Everything else is inline Tailwind utility classes — there's no component
 library (no shadcn/Radix/etc. in `package.json`).
@@ -89,7 +94,7 @@ project. It is imported **after** `design-system/master.css` and composes with i
 radius is read from MASTER's `--radius-*` ramp, motion tokens are namespaced
 `--brand-dur-*` / `--brand-ease-*`, every transition enumerates its properties (G10),
 and it never declares `:focus-visible` — MASTER owns the ring. It carries no hue; the
-site's neon-green tokens are mapped onto the `--brand-*` slots in `globals.css`.
+site's monochrome tokens are mapped onto the `--brand-*` slots in `globals.css`.
 
 Provides `.meta` / `.meta-md` / `.tnum` (the mono label voice, at MASTER's 12px floor),
 `.brand-card` / `.brand-card-interactive`, the `.media` photography system,
@@ -99,7 +104,7 @@ Provides `.meta` / `.meta-md` / `.tnum` (the mono label voice, at MASTER's 12px 
 
 The matrix canvas used to paint near-white glyphs (`rgba(220,220,220,0.85)`) at
 `opacity-50`, which put it at the same visual depth as the hero body copy — the page
-did not read in the first three seconds. It is now tinted to the site's own green,
+did not read in the first three seconds. It is now a mid grey, one step below the foreground,
 runs at `opacity-[0.22]`, sits under a radial scrim at `z-[1]`, and pauses on
 `visibilitychange`. Do not raise it back.
 
